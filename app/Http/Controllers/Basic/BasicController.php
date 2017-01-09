@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Session;
 
 class BasicController extends Controller {
 	
-
 	public function login(Request $request)
 	{
 		$username = $request->input('username');
