@@ -36,6 +36,7 @@
         </style>
     </head>
     <body>
+    	<a href='/logout'>登出</a>
         <div class="container">
             <div class="content">
                 <div class="title">Laravel 5</div>
