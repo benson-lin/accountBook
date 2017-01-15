@@ -58,7 +58,7 @@ class IncomeExpendController extends Controller {
 	        $builder = $builder->where('remark', 'like', $remark);
 	    }
 	    $result = $builder->with('account')->with('incomeExpend')
-	       ->orderBy('update_time', 'desc')
+	       ->orderBy('add_time', 'desc')
 	       ->paginate($limit)->toArray();
 	    $data = [
 	       'total' => $result['total'],

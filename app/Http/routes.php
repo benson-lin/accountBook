@@ -22,7 +22,9 @@ Route::group(['middleware'=>['check.login'], 'namespace'=>'IncomeExpend'], funct
 
     Route::get('/queryRecords', 'IncomeExpendController@queryRecords');
     
-    Route::get('/addRecord', 'IncomeExpendController@addRecord');
+    Route::post('/addRecord', 'IncomeExpendController@addRecord');
+    
+    Route::get('/exportRecords', 'ImportExportController@exportRecords');
 });
     
     
