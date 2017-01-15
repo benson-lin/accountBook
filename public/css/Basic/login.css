@@ -1,0 +1,21 @@
+body {
+	background-color :#d8e5d4;	
+}
+
+#myTab{
+	margin: 0 auto;
+	width: 150px;
+	border: 1px solid #000;
+}
+
+input {
+	margin: 5px;
+}
+
+.main{
+	margin: 0 auto;
+	width: 500px;
+	height: 500px;
+	border: 1px solid #000;
+	background: #ddd;
+}

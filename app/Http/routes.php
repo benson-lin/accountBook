@@ -18,3 +18,11 @@ Route::group(['middleware'=>['check.login'], 'namespace'=>'Basic'], function (){
 	});
 });
 
+Route::group(['middleware'=>['check.login'], 'namespace'=>'IncomeExpend'], function (){
+
+    Route::get('/queryRecords', 'IncomeExpendController@queryRecords');
+    
+    Route::get('/addRecord', 'IncomeExpendController@addRecord');
+});
+    
+    

@@ -1,4 +1,7 @@
 
+
+
+
 $('#registerButton').click(function(){
 	var username = $('#register-username').val();
 	var nickname = $('#register-nickname').val();

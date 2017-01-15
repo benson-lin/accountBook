@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Basic;
 
 use App\Http\Controllers\Controller;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\Basic\User;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use App\Util\MVCUtil;
+use App\Models\UserModel;
 
 class BasicController extends Controller {
 	
@@ -17,9 +16,10 @@ class BasicController extends Controller {
 	{
 		$nickname = $request->input('login-nickname');
 		$password = $request->input('login-password');
-		$user = User::where('nickname', $nickname)->where('password', $password)
-			->get()->toArray();
+		$user = UserModel::where('nickname', $nickname)->where('password', $password)
+			->first();
 		if(!empty($user)){
+		    Session::set('user_id', $user['id']);
 			Session::set('nickname', $nickname);
 			Cookie::queue('nickname', $nickname);
 			return redirect()->to('');
@@ -44,7 +44,7 @@ class BasicController extends Controller {
 		$username = $request->input('register-username');
 		$nickname = $request->input('register-nickname');
 		$password = $request->input('register-password');
-		$user = User::where('nickname', $nickname)->get()->toArray();
+		$user = UserModel::where('nickname', $nickname)->get()->toArray();
 
 		$code = 200;
 		$message = '';
@@ -52,7 +52,7 @@ class BasicController extends Controller {
 			$code =501;
 			$message = '用户名已存在';
 		}else{
-			User::insert(['username'=>$username,'nickname'=>$nickname,'password'=>$password]);
+			UserModel::insert(['username'=>$username,'nickname'=>$nickname,'password'=>$password]);
 			$result['code'] = 200;
 		}
 		return MVCUtil::getResponseContent($code, $message);
