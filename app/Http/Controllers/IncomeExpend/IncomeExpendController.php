@@ -72,19 +72,50 @@ class IncomeExpendController extends Controller {
 	{
 	    $type = $request->input("type");//1是收入，2是支出
 	    $money = $request->input("money");
+	    $addTime = $request->input("addTime");
 	    $accountCategoryId = $request->input("accountCategoryId");
 	    $incomeExpendCategoryId = $request->input("incomeExpendCategoryId");
 	    $remark = $request->input("remark");
         IncomeExpendRecordModel::insert([
             'user_id' => $this->userId,
             'money' => $money,
-            'accountCategoryId' => $accountCategoryId,
-            'incomeExpendCategoryId' => $incomeExpendCategoryId,
+            'account_category_id' => $accountCategoryId,
+            'income_expend_categoryId' => $incomeExpendCategoryId,
             'type' => $type,
+            'add_time' => $addTime,
             'remark' => $remark,
         ]);
 	    return MVCUtil::getResponseContent(self::RET_SUCC);
-	    
-	    
+	}
+	
+	/**
+	 * 修改支出记录
+	 * 不可将支出和收入切换
+	 */
+	public function modifyRecord(Request $request)
+	{
+	    $recordId = $request->input("id");
+	    $money = $request->input("money");
+	    $addTime = $request->input("addTime");
+	    $accountCategoryId = $request->input("accountCategoryId");
+	    $incomeExpendCategoryId = $request->input("incomeExpendCategoryId");
+	    $remark = $request->input("remark");
+	    IncomeExpendRecordModel::where('id', $recordId)->where('user_id', $userId)->update([
+            'money' => $money,
+            'account_category_id' => $accountCategoryId,
+            'income_expend_categoryId' => $incomeExpendCategoryId,
+            'add_time' => $addTime,
+            'remark' => $remark,
+        ]);
+	    return MVCUtil::getResponseContent(self::RET_SUCC);
+	}
+	
+	public function removeRecord(Request $request)
+	{
+	    $recordId = $request->input("id");
+	    $userId = Session::get('user_id');
+	    //需要加上user_id，防止恶意删除其他用户的
+	    IncomeExpendRecordModel::where('id', $recordId)->where('user_id', $userId)->delete();
+	    return MVCUtil::getResponseContent(self::RET_SUCC);
 	}
 }
