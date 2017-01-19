@@ -61,9 +61,9 @@ class BasicController extends Controller {
 	
 	public function sendMail()
 	{
-		
 	}
 // 	public function export(){
+		
 // 		$cellData = [
 // 			['学号','科目','成绩'],
 // 			['10001','AAAAA','99'],
