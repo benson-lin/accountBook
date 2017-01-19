@@ -7,6 +7,8 @@ Route::group(['namespace'=>'Basic'], function (){
 	Route::post('register', 'BasicController@register');
 	Route::get('logout', 'BasicController@logout');
 	
+	Route::get('sendMail', 'BasicController@sendMail');
+	
 });
 
 
@@ -14,14 +16,14 @@ Route::group(['namespace'=>'Basic'], function (){
 Route::group(['middleware'=>['check.login'], 'namespace'=>'Basic'], function (){
 	
 	Route::get('/', function (){
-		return view('welcome');
+		return view('index');
 	});
 });
 
 Route::group(['middleware'=>['check.login'], 'namespace'=>'IncomeExpend'], function (){
 
     Route::get('/queryRecords', 'IncomeExpendController@queryRecords');
-    
+    	
     Route::post('/addRecord', 'IncomeExpendController@addRecord');
     
     Route::get('/exportRecords', 'ImportExportController@exportRecords');

@@ -1,21 +1,41 @@
 body {
-	background-color :#d8e5d4;	
+	background-color :#FAFAFA;	
 }
 
-#myTab{
-	margin: 0 auto;
-	width: 150px;
-	border: 1px solid #000;
+.signIn {
+	margin-top: 100px;
+	margin-bottom: 40px;	
 }
 
-input {
-	margin: 5px;
+.signIn span {
+    display: block;
+    margin: 0 auto;
+    width: 500px;
+    text-align: center;
+    font-size: 30px;
 }
 
 .main{
 	margin: 0 auto;
 	width: 500px;
-	height: 500px;
-	border: 1px solid #000;
-	background: #ddd;
+	background-color: #fff;
+	padding:20px;
 }
+
+.main #myTab{
+	margin: 0 auto;
+	width: 150px;
+}
+
+.main .tab-content {
+	padding:20px;
+}
+
+.main .tab-content p {
+	margin-left: 10px;
+}
+
+.main .tab-content input {
+	margin: 10px;
+}
+
