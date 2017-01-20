@@ -1,0 +1,89 @@
+@CHARSET "UTF-8";
+
+body{
+	background-color: #CEDCC3;
+	font-size: 12px;
+}
+
+.main {
+	margin: 50px 50px 50px 50px;
+	
+}
+.main #search{
+	background-color: #FFF;
+	padding: 15px;
+}
+
+.main #list {
+	margin-top: 15px;
+	background-color: #FFF;
+}
+
+.main #search .search-form {
+	marigin: 10px 0 0 30px;
+	width: 800px;
+}
+
+.main #search .form-control {
+	height:30px;
+	margin-top:8px;
+}
+
+.main #search .form-account-catetory, .form-remark, .form-in-ex-category {
+	width: 20%;
+}
+
+.main #search .in-ex-category{
+	width: 100%;
+}
+.main #search .money-begin, .money-end{
+	width: 45%;
+}
+
+.main #search .add-time-begin, .add-time-end {
+	width: 45%;
+}
+
+.main #search .money-option, .add-time-option {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left:-7px;
+	margin-top:-8px;
+}
+
+.main #search .pull-left {
+	float:left;'
+}
+
+.main #search .pull-right {
+}
+
+.main #list tr td, th {
+	text-align: center;
+}
+
+
+.main #list .dataTables_length {
+	margin-top: 15px;
+	float: left;
+	margin-left: 30px;
+}
+
+.main #list .dataTables_paginate {
+	margin-top: 6px;
+	float: left;
+	margin-left: 30px;
+}
+
+.main #list .dataTables_paginate .paginate_button {
+	padding: 0px;
+}
+
+.main #list .dataTables_info {
+	float: right;
+	margin-right:30px;
+	margin-top: 6px;
+	clear: none;
+}
+

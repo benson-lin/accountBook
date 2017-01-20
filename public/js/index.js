@@ -1,21 +1,20 @@
 $(function(){
-	$('#myTable').DataTable({
+	
+	//获取表单内容
+	table = $('#myTable').DataTable({
 		dom: "<'page-table'ftr><'page-table-paginate clearfix'lpi>",
 		pageLength: 15,
 		paging: true,
 		serverSide: true,
-		searching: false,
-		info: true,
-		processing: true,
-		ordering: false,
-		audoWidth:false,
-		lengthMenu: [10,15,20,25,100],
+		scrollX: true,
         ajax : {
         	method: 'GET',
         	url: '/queryRecords',
         	data: function(d){
         		var data = {};
-        		data.type=1;
+//        		data.type=1;
+        		data.limit = d.length;
+        		data.page = d.start/d.length+1;
         		return data;
         	},
         	dataSrc: function(result){
@@ -41,30 +40,34 @@ $(function(){
               {data: 'remark'},
               
          ],
-         language: {
-             "sProcessing": "处理中...",
-             "sLengthMenu": "显示 _MENU_ 项结果",
-             "sZeroRecords": "没有匹配结果",
-             "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-             "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-             "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-             "sInfoPostFix": "",
-             "sSearch": "搜索:",
-             "sUrl": "",
-             "sEmptyTable": "表中数据为空",
-             "sLoadingRecords": "载入中...",
-             "sInfoThousands": ",",
-             "oPaginate": {
-                 "sFirst": "首页",
-                 "sPrevious": "上页",
-                 "sNext": "下页",
-                 "sLast": "末页"
-             },
-             "oAria": {
-                 "sSortAscending": ": 以升序排列此列",
-                 "sSortDescending": ": 以降序排列此列"
-             }
-         },
 	});
 	
+	$('.search-button').click(function(){
+		table.ajax.reload();
+	});
+	
+	getQueryMap();
 });
+
+
+function getQueryMap(){
+	$.ajax({
+		type: "get", 
+		url: "/getCategoryMap", 
+		dataType: "json",
+		success: function(result){ 
+			if(result.code==0) {
+				var accountCategoryMap = result.data.accountCategoryMap;
+				var incomeExpendCategoryMap = result.data.incomeExpendCategoryMap;
+				$.each(accountCategoryMap, function(index, account){
+					$(".account-options").append("<option value="+account.id+">"+account.name+"</option>");
+				});
+				$.each(incomeExpendCategoryMap, function(index, inExpend){
+					$(".in-ex-category-options").append("<option value="+inExpend.id+">"+inExpend.name+"</option>");
+				});
+			}
+		} 
+	});
+
+
+}

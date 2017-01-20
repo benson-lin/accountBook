@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\IncomeExpendRecordModel;
 use App\Util\MVCUtil;
+use App\Models\AccountCategoryModel;
+use App\Models\IncomeExpendCategoryModel;
 
 class IncomeExpendController extends Controller {
 	
@@ -84,7 +86,16 @@ class IncomeExpendController extends Controller {
             'remark' => $remark,
         ]);
 	    return MVCUtil::getResponseContent(self::RET_SUCC);
-	    
-	    
+	}
+	
+	public function getCategoryMap(){
+		
+		$accountCategoryMap = AccountCategoryModel::get();
+		$incomeExpendCategoryMap = IncomeExpendCategoryModel::get();
+		return MVCUtil::getResponseContent(self::RET_SUCC, '', [
+				'accountCategoryMap'=>$accountCategoryMap,
+				'incomeExpendCategoryMap' => $incomeExpendCategoryMap
+		]);
+		
 	}
 }
