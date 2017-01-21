@@ -12,7 +12,22 @@ $(function(){
         	url: '/queryRecords',
         	data: function(d){
         		var data = {};
-//        		data.type=1;
+        		
+        		var account = $('.account-options').val();
+        		var moneyBegin = $("input[name=money-begin]").val();
+        		var moneyEnd = $("input[name=money-end]").val();
+        		var inExpend = $('.in-ex-category-options').val();
+        		var addTimeBegin = $("input[name=add-time-begin]").val();
+        		var addTimeEnd = $("input[name=add-time-end]").val();
+        		var remark = $("input[name=remark]").val();
+        		data.addTimeGreater = addTimeBegin;
+        		data.addTimeLess = addTimeEnd;
+        		data.moneyGreater = moneyBegin;
+        		data.moneyLess = moneyEnd;
+        		data.accountCategoryId = account;
+        		data.remark = remark;
+        		data.incomeExpendCategoryId = inExpend;
+        		
         		data.limit = d.length;
         		data.page = d.start/d.length+1;
         		return data;
@@ -38,6 +53,7 @@ $(function(){
             	  }
               },
               {data: 'remark'},
+              {data: 'create_time'},
               
          ],
 	});

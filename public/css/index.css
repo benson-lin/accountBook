@@ -3,11 +3,22 @@
 body{
 	background-color: #CEDCC3;
 	font-size: 12px;
+	font-family: "微软雅黑", "sans-serif";
+}
+
+.menu {
+	margin-top: 30px;
+	background-color: #FFF;
+}
+
+.menu .nav-stacked > li{
+	font-size: 16px;
+	text-align: center;
 }
 
 .main {
-	margin: 50px 50px 50px 50px;
-	
+	padding-top: 30px;
+	padding-right: 30px;	
 }
 .main #search{
 	background-color: #FFF;
@@ -27,6 +38,7 @@ body{
 .main #search .form-control {
 	height:30px;
 	margin-top:8px;
+	font-size: 12px;
 }
 
 .main #search .form-account-catetory, .form-remark, .form-in-ex-category {
@@ -36,7 +48,7 @@ body{
 .main #search .in-ex-category{
 	width: 100%;
 }
-.main #search .money-begin, .money-end{
+.main #search .form-money-begin, .form-money-end{
 	width: 45%;
 }
 

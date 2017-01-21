@@ -16,6 +16,8 @@ class IncomeExpendController extends Controller {
 	{
 	    $createTimeGreater = $request->input("createTimeGreater");
 	    $createTimeLess = $request->input("createTimeLess");
+	    $addTimeGreater = $request->input("addTimeGreater");
+	    $addTimeLess = $request->input("addTimeLess");
 	    $updateTimeGreater = $request->input("updateTimeGreater");
 	    $updateTimeLess = $request->input("updateTimeLess");
 	    $moneyGreater = $request->input("moneyGreater");
@@ -34,6 +36,12 @@ class IncomeExpendController extends Controller {
 	    }
 	    if (!empty($createTimeLess)) {
 	        $builder = $builder->where('create_time', '<=', $createTimeLess);
+	    }
+	    if (!empty($addTimeGreater)) {
+	    	$builder = $builder->where('add_time', '>=', $addTimeGreater);
+	    }
+	    if (!empty($addTimeLess)) {
+	    	$builder = $builder->where('add_time', '<=', $addTimeLess);
 	    }
 	    if (!empty($updateTimeGreater)) {
 	        $builder = $builder->where('update_time', '>=', $updateTimeGreater);
@@ -57,7 +65,7 @@ class IncomeExpendController extends Controller {
 	        $builder = $builder->where('type', $type);
 	    }
 	    if (!empty($remark)) {
-	        $builder = $builder->where('remark', 'like', $remark);
+	        $builder = $builder->where('remark', 'like', '%'.$remark.'%');
 	    }
 	    $result = $builder->with('account')->with('incomeExpend')
 	       ->orderBy('add_time', 'desc')
