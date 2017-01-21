@@ -15,9 +15,11 @@
 		<script src="plugins/bootstrap-datetimepicker/moment.js"></script>
 		<script src="plugins/bootstrap-datetimepicker/zh-cn.js"></script>
 		<script src="plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
-	<script src="js/index.js"></script>	
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<script src="js/index.js"></script>	
+	<script src="js/common.js"></script>	
+
     </head>
     <body>
     

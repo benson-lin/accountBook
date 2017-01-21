@@ -90,11 +90,11 @@ function initQueryMap(){
 
 function initDateTimePicker(){
 	$('#add-time-begin').datetimepicker({
-		format: 'YYYY-MM-DD hh:mm',
+		format: 'YYYY-MM-DD',
 		locale: 'zh-cn',
 	});
 	$('#add-time-end').datetimepicker({
-		format: 'YYYY-MM-DD hh:mm',
+		format: 'YYYY-MM-DD',
 		locale: 'zh-cn',
 	});
 }
