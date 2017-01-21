@@ -26,12 +26,12 @@ abstract class Controller extends BaseController
 
     /** 每页默认显示数量 */
     const LIMIT_DEFAULT = 10;
-    protected $userId = '';
+    protected $nickname = '';
     
     
     public function __construct()
     {
-        $this->userId = Session::get('user_id');
+        $this->nickname = Session::get('nickname');
     }
     
     

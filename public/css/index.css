@@ -1,62 +1,43 @@
 @CHARSET "UTF-8";
 
-body{
-	background-color: #CEDCC3;
-	font-size: 12px;
-	font-family: "微软雅黑", "sans-serif";
-}
 
-.menu {
-	margin-top: 30px;
-	background-color: #FFF;
-}
-
-.menu .nav-stacked > li{
-	font-size: 16px;
-	text-align: center;
-}
-
-.main {
-	padding-top: 30px;
-	padding-right: 30px;	
-}
-.main #search{
+.bottom .main #search{
 	background-color: #FFF;
 	padding: 15px;
 }
 
-.main #list {
+.bottom .main #list {
 	margin-top: 15px;
 	background-color: #FFF;
 }
 
-.main #search .search-form {
+.bottom .main #search .search-form {
 	marigin: 10px 0 0 30px;
 	width: 800px;
 }
 
-.main #search .form-control {
+.bottom .main #search .form-control {
 	height:30px;
 	margin-top:8px;
 	font-size: 12px;
 }
 
-.main #search .form-account-catetory, .form-remark, .form-in-ex-category {
+.bottom .main #search .form-account-catetory, .form-remark, .form-in-ex-category {
 	width: 20%;
 }
 
-.main #search .in-ex-category{
+.bottom .main #search .in-ex-category{
 	width: 100%;
 }
-.main #search .form-money-begin, .form-money-end{
+.bottom .main #search .form-money-begin, .form-money-end{
 	width: 45%;
 }
 
-.main #search .add-time-begin, .add-time-end {
+.bottom .main #search .add-time-begin, .add-time-end {
 	width: 45%;
 }
 
-.main #search .money-option, .add-time-option {
+.bottom .main #search .money-option, .add-time-option {
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -64,35 +45,35 @@ body{
 	margin-top:-8px;
 }
 
-.main #search .pull-left {
+.bottom .main #search .pull-left {
 	float:left;'
 }
 
-.main #search .pull-right {
+.bottom .main #search .pull-right {
 }
 
-.main #list tr td, th {
+.bottom .main #list tr td, th {
 	text-align: center;
 }
 
 
-.main #list .dataTables_length {
+.bottom .main #list .dataTables_length {
 	margin-top: 15px;
 	float: left;
 	margin-left: 30px;
 }
 
-.main #list .dataTables_paginate {
+.bottom .main #list .dataTables_paginate {
 	margin-top: 6px;
 	float: left;
 	margin-left: 30px;
 }
 
-.main #list .dataTables_paginate .paginate_button {
+.bottom .main #list .dataTables_paginate .paginate_button {
 	padding: 0px;
 }
 
-.main #list .dataTables_info {
+.bottom .main #list .dataTables_info {
 	float: right;
 	margin-right:30px;
 	margin-top: 6px;

@@ -13,4 +13,6 @@ class UserModel extends Model
     protected $table = self::TABLE;
     protected $primaryKey = 'id';
     
+    protected $guarded = ['password', 'create_time', 'update_time']; 
+    
 }

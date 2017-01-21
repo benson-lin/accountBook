@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+
+body{
+	background-color: #FAFAFA;
+	font-size: 12px;
+	font-family: "微软雅黑", "sans-serif";
+}
+
+.body{
+	margin: 10px;
+}
+
+.top {
+	height: 60px;
+	border: 1px solid #fff;
+	margin-left: 15px;
+	
+}
+
+.top > span {
+	font-weight: bold;
+	font-size: 50px;
+	font-style: italic;
+}
+
+.top .info {
+	float: right;
+	margin-top: 10px;
+}
+
+.top .info .btn-default{
+	background-image: none;
+}
+
+.bottom {
+	margin-top:10px;
+}
+
+.bottom .menu {
+	background-color: #FFF;
+}
+
+.bottom .menu .nav-tabs>li.active>a {
+	border: none;
+}
+
+.bottom .menu .nav-stacked > li{
+	font-size: 16px;
+	text-align: center;
+}

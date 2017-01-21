@@ -12,6 +12,11 @@ use App\Models\UserModel;
 
 class BasicController extends Controller {
 	
+    public function index()
+    {
+        return response()->view('index');
+    }
+    
 	public function login(Request $request)
 	{
 		$nickname = $request->input('login-nickname');

@@ -1,5 +1,6 @@
 $(function(){
-	
+	initQueryMap();
+	initDateTimePicker();
 	//获取表单内容
 	table = $('#myTable').DataTable({
 		dom: "<'page-table'ftr><'page-table-paginate clearfix'lpi>",
@@ -62,11 +63,11 @@ $(function(){
 		table.ajax.reload();
 	});
 	
-	getQueryMap();
+
 });
 
 
-function getQueryMap(){
+function initQueryMap(){
 	$.ajax({
 		type: "get", 
 		url: "/getCategoryMap", 
@@ -84,6 +85,16 @@ function getQueryMap(){
 			}
 		} 
 	});
+}
 
 
+function initDateTimePicker(){
+	$('#add-time-begin').datetimepicker({
+		format: 'YYYY-MM-DD hh:mm',
+		locale: 'zh-cn',
+	});
+	$('#add-time-end').datetimepicker({
+		format: 'YYYY-MM-DD hh:mm',
+		locale: 'zh-cn',
+	});
 }

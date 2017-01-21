@@ -59,6 +59,7 @@
     	
     	
     </body>
-    <link rel="stylesheet" href="css/Basic/login.css">
+    <link rel="stylesheet" href="css/login.css">
     <script type="text/javascript" src="js/basic.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
 </html>
