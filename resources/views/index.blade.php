@@ -102,6 +102,17 @@
     		    		</div>
     		    	</div>
     		    </div>
+    		    <div class="add-import-export-record">
+    		    	<div class="col-sm-1 add-record">
+    		    			<button name="add-record" class="btn btn-default add-record-button">添加记录</button>
+    		    	</div>
+    		    	<div class="col-sm-1 batch-import">
+    		    			<button name="batch-import" class="btn btn-default batch-import-button">批量导入</button>
+    		    	</div>
+    		    	<div class="col-sm-1 batch-export">
+    		    			<button name="batch-export" class="btn btn-default batch-export-button">批量导出</button>
+    		    	</div>
+    		    </div>
     			<div id="list">
     				<table id="myTable" class="display">
     				     <thead>

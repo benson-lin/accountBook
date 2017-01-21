@@ -1,15 +1,36 @@
 @CHARSET "UTF-8";
 
+.bottom .add-import-export-record{
+	height:50px;
+	width:100%;
+	position: relative;
+}
+.bottom .add-import-export-record .add-record{
+	position: absolute;
+	left: 10px;
+	top: 15px;
+}
+.bottom .add-import-export-record .batch-import{
+	position: absolute;
+	left: 95px;
+	top: 15px;
+}
 
+.bottom .add-import-export-record .batch-export{
+	position: absolute;
+	left: 180px;
+	top: 15px;
+}
+
+.bottom .add-import-export-record .col-sm-1{
+	padding: 0px;
+}
 .bottom .main #search{
 	background-color: #FFF;
 	padding: 15px;
 }
 
-.bottom .main #list {
-	margin-top: 15px;
-	background-color: #FFF;
-}
+
 
 .bottom .main #search .search-form {
 	marigin: 10px 0 0 30px;
@@ -50,6 +71,10 @@
 }
 
 .bottom .main #search .pull-right {
+}
+
+.bottom .main #list {
+	background-color: #FFF;
 }
 
 .bottom .main #list tr td, th {
