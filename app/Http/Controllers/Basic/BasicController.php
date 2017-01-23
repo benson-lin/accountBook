@@ -54,13 +54,11 @@ class BasicController extends Controller {
 		$code = 200;
 		$message = '';
 		if(!empty($user)){//用户已存在
-			$code =501;
-			$message = '用户名已存在';
+			return MVCUtil::getResponseContent(self::RET_FAIL, '用户已存在！');
 		}else{
 			UserModel::insert(['username'=>$username,'nickname'=>$nickname,'password'=>$password]);
-			$result['code'] = 200;
+			return MVCUtil::getResponseContent(self::RET_SUCC, '注册成功！请登录');
 		}
-		return MVCUtil::getResponseContent($code, $message);
 		
 	}
 	

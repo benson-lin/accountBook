@@ -1,6 +1,64 @@
 $(function(){
 	initQueryMap();
 	initDateTimePicker();
+	getFormListData();
+	$('.search-button').click(function(){
+		table.ajax.reload();
+	});
+	$('.add-record-button').click(function(){
+		
+		layui.use(['layer', 'form'], function(){
+			var layer = layui.layer;
+			layer.open({
+				type: 1,
+				area: ['800px', '560px'],
+				title: '添加记录',
+				content: $('.add-record-form').html(),
+				success: function(layero, index){
+						layui.form().render();
+				}
+			});
+		});
+	});
+
+});
+
+
+function initQueryMap(){
+	$.ajax({
+		type: "get", 
+		url: "/getCategoryMap", 
+		dataType: "json",
+		success: function(result){ 
+			if(result.code==0) {
+				var accountCategoryMap = result.data.accountCategoryMap;
+				var incomeExpendCategoryMap = result.data.incomeExpendCategoryMap;
+				$.each(accountCategoryMap, function(index, account){
+					$(".account-options").append("<option value="+account.id+">"+account.name+"</option>");
+				});
+				$.each(incomeExpendCategoryMap, function(index, inExpend){
+					$(".in-ex-category-options").append("<option value="+inExpend.id+">"+inExpend.name+"</option>");
+				});
+			}
+		} 
+	});
+}
+
+
+function initDateTimePicker(){
+	$('#add-time-begin').datetimepicker({
+		format: 'YYYY-MM-DD',
+		locale: 'zh-cn',
+	});
+	$('#add-time-end').datetimepicker({
+		format: 'YYYY-MM-DD',
+		locale: 'zh-cn',
+	});
+}
+
+
+function getFormListData(){
+	
 	//获取表单内容
 	table = $('#myTable').DataTable({
 		dom: "<'page-table'ftr><'page-table-paginate clearfix'lpi>",
@@ -57,44 +115,5 @@ $(function(){
               {data: 'create_time'},
               
          ],
-	});
-	
-	$('.search-button').click(function(){
-		table.ajax.reload();
-	});
-	
-
-});
-
-
-function initQueryMap(){
-	$.ajax({
-		type: "get", 
-		url: "/getCategoryMap", 
-		dataType: "json",
-		success: function(result){ 
-			if(result.code==0) {
-				var accountCategoryMap = result.data.accountCategoryMap;
-				var incomeExpendCategoryMap = result.data.incomeExpendCategoryMap;
-				$.each(accountCategoryMap, function(index, account){
-					$(".account-options").append("<option value="+account.id+">"+account.name+"</option>");
-				});
-				$.each(incomeExpendCategoryMap, function(index, inExpend){
-					$(".in-ex-category-options").append("<option value="+inExpend.id+">"+inExpend.name+"</option>");
-				});
-			}
-		} 
-	});
-}
-
-
-function initDateTimePicker(){
-	$('#add-time-begin').datetimepicker({
-		format: 'YYYY-MM-DD',
-		locale: 'zh-cn',
-	});
-	$('#add-time-end').datetimepicker({
-		format: 'YYYY-MM-DD',
-		locale: 'zh-cn',
 	});
 }

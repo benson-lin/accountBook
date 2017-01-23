@@ -1,4 +1,6 @@
-
+$(function(){
+	layui.use(['layer']);
+});
 
 $('#registerButton').click(function(){
 	var username = $('#register-username').val();
@@ -7,13 +9,19 @@ $('#registerButton').click(function(){
 	$.ajax({
 		  type: 'POST',
 		  url: '/register',
+		  dataType: 'json',
 		  data: {
 			  'register-username' : username,
 			  'register-nickname' : nickname,
 			  'register-password' : password
 		  },
 		  success: function(result){
-			  alert(result);
+			  if(result.code != 0){
+				  layer.msg(result.message);
+			  }else{
+				  layer.msg(result.message);
+				  location.href = '/';
+			  }
 		  }
 		});
 });

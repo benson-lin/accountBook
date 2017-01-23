@@ -1,6 +1,7 @@
 
 
 $(function(){
+	$("#nickname").text($.cookie('nickname'));
 	user = getUserInfo();
 	$("#nickname").text(user.nickname);
 	console.log(user.nickname);

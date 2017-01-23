@@ -7,6 +7,8 @@
         <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap-theme.min.css">
         <script type="text/javascript" src="plugins/jquery/jquery-3.1.1.min.js"></script>
         <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="plugins/layui/layui.js"></script>
+        <script src="plugins/layui/css/layui.css"></script>	
     </head>
     <body>
     <div class="body">
@@ -52,14 +54,9 @@
 	    </div>
     
     </div>
-    
-
-    	
-    	
     	
     	
     </body>
     <link rel="stylesheet" href="css/login.css">
     <script type="text/javascript" src="js/basic.js"></script>
-    <script type="text/javascript" src="js/common.js"></script>
 </html>
