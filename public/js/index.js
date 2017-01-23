@@ -6,8 +6,7 @@ $(function(){
 		table.ajax.reload();
 	});
 	$('.add-record-button').click(function(){
-		
-		layui.use(['layer', 'form'], function(){
+		layui.use(['layer', 'form', 'laydate'], function(){
 			var layer = layui.layer;
 			layer.open({
 				type: 1,
@@ -16,10 +15,22 @@ $(function(){
 				content: $('.add-record-form').html(),
 				success: function(layero, index){
 						layui.form().render();
+
 				}
 			});
 		});
 	});
+	
+//	layui.use(['laydate'],function(){
+//		var $=layui.jquery;
+//		layer=layui.layer;
+//		laydate=layui.laydate;
+//		laydate({
+//			elem: '#add-record-add-time'
+//		});
+//	});
+
+	
 
 });
 
@@ -54,6 +65,11 @@ function initDateTimePicker(){
 		format: 'YYYY-MM-DD',
 		locale: 'zh-cn',
 	});
+	$('#add-record-add-time').datetimepicker({
+		format: 'YYYY-MM-DD',
+		locale: 'zh-cn',
+	});
+
 }
 
 
@@ -71,7 +87,6 @@ function getFormListData(){
         	url: '/queryRecords',
         	data: function(d){
         		var data = {};
-        		
         		var account = $('.account-options').val();
         		var moneyBegin = $("input[name=money-begin]").val();
         		var moneyEnd = $("input[name=money-end]").val();

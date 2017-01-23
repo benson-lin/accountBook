@@ -2,22 +2,27 @@
 <html>
     <head>
         <title>首页</title>
+        <!-- bootstrap jquery -->
         <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap-theme.min.css">
         <script type="text/javascript" src="plugins/jquery/jquery-3.1.1.min.js"></script>
         <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="plugins/jquery-cookie/jquery.cookie.js"></script>
+        <!-- datatables -->
 		<script type="text/javascript" charset="utf8" src="plugins/datatables/jquery.dataTables.js"></script>    
 		<link rel="stylesheet" type="text/css" href="plugins/datatables/jquery.dataTables.css">
 		<script type="text/javascript" charset="utf8" src="plugins/datatables/datatables.js"></script>    
 		<script type="text/javascript" charset="utf8" src="plugins/datatables/dataTables.bootstrap.js"></script>    
 		<link rel="stylesheet" type="text/css" href="plugins/datatables/dataTables.bootstrap.css">
+		<!-- bootstrap-datetimepicker  -->
 		<link rel="stylesheet" href="plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
 		<script src="plugins/bootstrap-datetimepicker/moment.js"></script>
 		<script src="plugins/bootstrap-datetimepicker/zh-cn.js"></script>
 		<script src="plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
-		<script src="plugins/jquery-cookie/jquery.cookie.js"></script>
-   		<script src="plugins/layui/layui.js"></script>
+		<!-- layer -->
+        <script src="plugins/layui/layui.js"></script>
 		<link rel="stylesheet" href="plugins/layui/css/layui.css"  media="all">
+		<!-- my -->
    	    <link rel="stylesheet" type="text/css" href="css/index.css">
 		<link rel="stylesheet" type="text/css" href="css/common.css">
 		<script src="js/index.js"></script>	
@@ -142,61 +147,51 @@
     <div class="add-record-form">
 		<form class="layui-form" action="">
 		  <div class="layui-form-item">
-		    <label class="layui-form-label">输入框</label>
+		    <label class="layui-form-label">添加时间</label>
 		    <div class="layui-input-block">
-		      <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+				<!-- <input type="text" class="laydate-icon" name="add-record-add-time" id="add-record-add-time"> -->
+		    	<input class="layui-input" placeholder="自定义日期格式" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+<!-- 		      <div class="laydate-icon" id="add-record-add-time"></div> -->
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
-		    <label class="layui-form-label">密码框</label>
+		    <label class="layui-form-label">类型</label>
 		    <div class="layui-input-block">
-		      <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+		      <input type="radio" name="type" value="支出" title="支出" checked>
+		      <input type="radio" name="type" value="收入" title="收入">
 		    </div>
-<!-- 		    <div class="layui-form-mid layui-word-aux">辅助文字</div> -->
 		  </div>
 		  <div class="layui-form-item">
-		    <label class="layui-form-label">选择框</label>
+		    <label class="layui-form-label">金额</label>
 		    <div class="layui-input-block">
-		      <select name="city" lay-verify="required">
-		        <option value=""></option>
-		        <option value="0">北京</option>
-		        <option value="1">上海</option>
-		        <option value="2">广州</option>
-		        <option value="3">深圳</option>
-		        <option value="4">杭州</option>
+		      <input type="text" name="money" required  lay-verify="required" placeholder="请输入金额" autocomplete="off" class="layui-input">
+		    </div>
+		  </div>
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">账户</label>
+		    <div class="layui-input-block">
+		      <select name="account" lay-verify="required" class="account-options">
+		        <option value="">请选择</option>
 		      </select>
 		    </div>
 		  </div>
-		  <div class="layui-form-item">
-		    <label class="layui-form-label">复选框</label>
+  		  <div class="layui-form-item">
+		    <label class="layui-form-label">类别</label>
 		    <div class="layui-input-block">
-		      <input type="checkbox" name="like[write]" title="写作">
-		      <input type="checkbox" name="like[read]" title="阅读" checked>
-		      <input type="checkbox" name="like[dai]" title="发呆">
+		      <select name="in-ex-category" lay-verify="required" class="in-ex-category-options">
+		        <option value="">请选择</option>
+		      </select>
 		    </div>
 		  </div>
-		  <div class="layui-form-item">
-		    <label class="layui-form-label">开关</label>
-		    <div class="layui-input-block">
-		      <input type="checkbox" name="switch" lay-skin="switch">
-		    </div>
-		  </div>
-		  <div class="layui-form-item">
-		    <label class="layui-form-label">单选框</label>
-		    <div class="layui-input-block">
-		      <input type="radio" name="sex" value="男" title="男">
-		      <input type="radio" name="sex" value="女" title="女" checked>
-		    </div>
-		  </div>
-		  <div class="layui-form-item layui-form-text">
-		    <label class="layui-form-label">文本域</label>
-		    <div class="layui-input-block">
-		      <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+  		  <div class="layui-form-item">
+		    <label class="layui-form-label">备注</label>
+      		<div class="layui-input-block">
+		      		<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
 		    <div class="layui-input-block">
-		      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+		      <button class="layui-btn" lay-submit lay-filter="formDemo">提交</button>
 		      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
 		    </div>
 		  </div>
