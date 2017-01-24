@@ -109,4 +109,10 @@
 	display:none;	
 }
 
+.layui-form {
+	padding-top:30px;
+	padding-right: 50px;
+	padding-left:20px;
+}
+
 

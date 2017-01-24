@@ -145,57 +145,54 @@
     </div>
     
     <div class="add-record-form">
-		<form class="layui-form" action="">
+		<div class="layui-form">
 		  <div class="layui-form-item">
 		    <label class="layui-form-label">添加时间</label>
 		    <div class="layui-input-block">
-				<!-- <input type="text" class="laydate-icon" name="add-record-add-time" id="add-record-add-time"> -->
-		    	<input class="layui-input" placeholder="自定义日期格式" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
-<!-- 		      <div class="laydate-icon" id="add-record-add-time"></div> -->
+		    	<input class="layui-input" placeholder="" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" name="addTime">
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
 		    <label class="layui-form-label">类型</label>
 		    <div class="layui-input-block">
-		      <input type="radio" name="type" value="支出" title="支出" checked>
-		      <input type="radio" name="type" value="收入" title="收入">
+		      <input type="radio" name="type" value="2" title="支出" checked  lay-filter="type">
+		      <input type="radio" name="type" value="1" title="收入" lay-filter="type">
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
 		    <label class="layui-form-label">金额</label>
 		    <div class="layui-input-block">
-		      <input type="text" name="money" required  lay-verify="required" placeholder="请输入金额" autocomplete="off" class="layui-input">
+		      <input type="text" name="money" required lay-verify="required" placeholder="请输入金额" autocomplete="off" class="layui-input" >
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
 		    <label class="layui-form-label">账户</label>
 		    <div class="layui-input-block">
-		      <select name="account" lay-verify="required" class="account-options">
-		        <option value="">请选择</option>
+		      <select name="accountCategory" lay-verify="required" class="account-options" lay-filter="accountCategory">
+<!-- 		        <option value="">请选择</option> -->
 		      </select>
 		    </div>
 		  </div>
   		  <div class="layui-form-item">
 		    <label class="layui-form-label">类别</label>
 		    <div class="layui-input-block">
-		      <select name="in-ex-category" lay-verify="required" class="in-ex-category-options">
-		        <option value="">请选择</option>
+		      <select name="inExCategory" lay-verify="required" class="add-record-in-ex-category-options" >
+<!-- 		        <option value="">请选择</option> -->
 		      </select>
 		    </div>
 		  </div>
   		  <div class="layui-form-item">
 		    <label class="layui-form-label">备注</label>
       		<div class="layui-input-block">
-		      		<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+		      		<textarea name="remark" placeholder="请输入内容" class="layui-textarea"></textarea>
 		    </div>
 		  </div>
-		  <div class="layui-form-item">
+		 <div class="layui-form-item">
 		    <div class="layui-input-block">
-		      <button class="layui-btn" lay-submit lay-filter="formDemo">提交</button>
-		      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		      <button class="layui-btn" lay-submit lay-filter="*">提交</button>
 		    </div>
-		  </div>
-		</form>
+		  </div> 
+		</div>
     </div>
     </body>
 

@@ -56,7 +56,7 @@ class IncomeExpendController extends Controller {
 	        $builder = $builder->where('money', '>=', $moneyGreater);
 	    }
 	    if (!empty($accountCategoryId)) {
-	        $builder = $builder->where('account_id', $accountCategoryId);
+	        $builder = $builder->where('account_category_id', $accountCategoryId);
 	    }
 	    if (!empty($incomeExpendCategoryId)) {
 	        $builder = $builder->where('income_expend_category_id', $incomeExpendCategoryId);
@@ -90,12 +90,12 @@ class IncomeExpendController extends Controller {
             'user_id' => $this->userId,
             'money' => $money,
             'account_category_id' => $accountCategoryId,
-            'income_expend_categoryId' => $incomeExpendCategoryId,
+            'income_expend_category_id' => $incomeExpendCategoryId,
             'type' => $type,
             'add_time' => $addTime,
             'remark' => $remark,
         ]);
-	    return MVCUtil::getResponseContent(self::RET_SUCC);
+	    return MVCUtil::getResponseContent(self::RET_SUCC, '添加成功');
 	}
 	
 	public function getCategoryMap(){
@@ -123,7 +123,7 @@ class IncomeExpendController extends Controller {
 	    IncomeExpendRecordModel::where('id', $recordId)->where('user_id', $userId)->update([
             'money' => $money,
             'account_category_id' => $accountCategoryId,
-            'income_expend_categoryId' => $incomeExpendCategoryId,
+            'income_expend_category_id' => $incomeExpendCategoryId,
             'add_time' => $addTime,
             'remark' => $remark,
         ]);

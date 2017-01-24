@@ -18,7 +18,7 @@ class IncomeExpendRecordModel extends Model
      * 获取关联账户信息
      */
     public function account() {
-        return $this->belongsTo('App\Models\AccountCategoryModel', 'account_id', 'id');
+        return $this->belongsTo('App\Models\AccountCategoryModel', 'account_category_id', 'id');
     }
     
     /**

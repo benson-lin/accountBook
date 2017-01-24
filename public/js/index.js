@@ -1,38 +1,74 @@
 $(function(){
+	layui.use(['layer']);
 	initQueryMap();
 	initDateTimePicker();
 	getFormListData();
+	initEvent();
+});
+
+function initEvent(){
 	$('.search-button').click(function(){
 		table.ajax.reload();
 	});
 	$('.add-record-button').click(function(){
-		layui.use(['layer', 'form', 'laydate'], function(){
+		$.each(incomeExpendCategoryMap, function(index, inExpend){
+			if(inExpend.type == 2){
+				$(".add-record-in-ex-category-options").append("<option value="+inExpend.id+">"+inExpend.name+"</option>");
+			}
+		});
+		layui.use(['form', 'laydate'], function(){
 			var layer = layui.layer;
 			layer.open({
 				type: 1,
-				area: ['800px', '560px'],
+				area: ['500px', '560px'],
 				title: '添加记录',
 				content: $('.add-record-form').html(),
 				success: function(layero, index){
-						layui.form().render();
-
+						var form = layui.form().render();
+						form.on('radio(type)', function(data){
+							$(".add-record-in-ex-category-options").text('');
+							$.each(incomeExpendCategoryMap, function(index, inExpend){
+								if(inExpend.type == data.value){
+									$(".add-record-in-ex-category-options").append("<option value="+inExpend.id+">"+inExpend.name+"</option>");
+								}
+							});
+							form.render('select');
+						});
+						form.on('submit(*)', function(data){
+							var allField = data.field;
+							$.ajax({
+								type: "POST", 
+								url: "/addRecord", 
+								dataType: "json",
+								data: {
+									type: allField.type,
+									money: allField.money,
+									addTime: allField.addTime,
+									accountCategoryId: allField.accountCategory,
+									incomeExpendCategoryId: allField.inExCategory,
+									remark: allField.remark
+								},
+								success: function(result){ 
+									if(result.code==0) {
+										layer.msg(result.message);
+										layer.closeAll('page');
+										table.ajax.reload();
+										return true;
+									}else{
+										layer.msg(result.message);
+										return false;
+									}
+								} 
+							});
+						});
+	
+	
 				}
 			});
 		});
 	});
 	
-//	layui.use(['laydate'],function(){
-//		var $=layui.jquery;
-//		layer=layui.layer;
-//		laydate=layui.laydate;
-//		laydate({
-//			elem: '#add-record-add-time'
-//		});
-//	});
-
-	
-
-});
+}
 
 
 function initQueryMap(){
@@ -42,8 +78,8 @@ function initQueryMap(){
 		dataType: "json",
 		success: function(result){ 
 			if(result.code==0) {
-				var accountCategoryMap = result.data.accountCategoryMap;
-				var incomeExpendCategoryMap = result.data.incomeExpendCategoryMap;
+				accountCategoryMap = result.data.accountCategoryMap;
+				incomeExpendCategoryMap = result.data.incomeExpendCategoryMap;
 				$.each(accountCategoryMap, function(index, account){
 					$(".account-options").append("<option value="+account.id+">"+account.name+"</option>");
 				});
@@ -65,11 +101,6 @@ function initDateTimePicker(){
 		format: 'YYYY-MM-DD',
 		locale: 'zh-cn',
 	});
-	$('#add-record-add-time').datetimepicker({
-		format: 'YYYY-MM-DD',
-		locale: 'zh-cn',
-	});
-
 }
 
 
