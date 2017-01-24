@@ -89,8 +89,8 @@ class ImportExportController extends Controller
                     $account = $oneLine[4];
                     $inEx = $oneLine[5];
                     $remark = $oneLine[6];
-                    if(empty($addTime)||empty($type)||empty($money)||empty($account)||empty($inEx)||empty($remark)){
-                        break;
+                    if(empty($addTime)||empty($type)||empty($money)||empty($account)||empty($inEx)){
+                        continue;
                     }
                     $records[] = [
                         'add_time' => $addTime,

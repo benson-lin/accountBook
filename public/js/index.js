@@ -16,7 +16,6 @@ function initEvent(){
 	        action: '/batchImportRecords',
 	        name: 'recordsExcel',
 	        onComplete: function(id, filename, result){
-	        	console.log(result);
 	        	layer.msg(result.message);
 	        	table.ajax.reload();
 	        }
