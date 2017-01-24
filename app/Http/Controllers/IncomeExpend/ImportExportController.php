@@ -8,6 +8,8 @@ use App\Models\IncomeExpendRecordModel;
 use App\Util\MVCUtil;
 use App\Enum\TypeEnum;
 use Maatwebsite\Excel\Facades\Excel;
+use Upload\Storage\FileSystem;
+use Upload\File;
 
 
 class ImportExportController extends Controller
@@ -53,11 +55,40 @@ class ImportExportController extends Controller
                 });
             });
         })->export('xls');
-        return MVCUtil::getResponseContent(self::RET_SUCC);
     }
     
     
-    
+    public function batchImportRecords(Request $request)
+    {
+    	$uploadDir = app()->storagePath().'/upload';
+    	if(!file_exists($uploadDir)) mkdir($uploadDir, 0755, true);
+    	$filename = uniqid();
+    	$storage = new \Upload\Storage\FileSystem($uploadDir);
+        $file = new \Upload\File('recordsExcel', $storage);    	
+    	$file->addValidations([
+            new \Upload\Validation\Size('5M'),
+            /** 上传附件支持'jpg', 'bmp', 'png', 'gif','txt','rar','zip','doc','docx','ini','conf','eml','xls','xlsx' 格式 */
+            // new \Upload\Validation\Mimetype(['image/jpg', 'image/jpeg', 'image/bmp', 'image/png', 'image/gif', 'text/plain', 'application/x-rar', 'application/zip', 'application/msword', 'applicationnd.openxmlformats-officedocument.wordprocessingml.document', 'message/rfc822', 'applicationf', 'applicationnd.ms-office', 'applicationnd.openxmlformats-officedocument.spreadsheetml.sheet']),
+        ]);
+        $filePath = $uploadDir.$file->getNameWithExtension();
+        $filename .= '.'.$file->getExtension();
+        try {
+            $file->upload();
+            Excel::load($filePath, function($reader){
+               $data = $reader->toArray();
+               echo "<pre>";
+               print_r($data);
+               echo "</pre>";
+               foreach ($data[0] as $cell) {
+               }
+            });
+            unlink($filePath);//删除临时文件
+        } catch (\Exception $e) {
+            $errors = $file->getErrors();
+            return MVCUtil::getResponseContent(self::RET_FAIL, json_encode($errors));
+        }
+        return MVCUtil::getResponseContent(self::RET_SUCC, '导入成功');
+    }
 }
 
 ?>

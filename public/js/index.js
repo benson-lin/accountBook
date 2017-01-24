@@ -7,6 +7,20 @@ $(function(){
 });
 
 function initEvent(){
+	$('.batch-export-button').click(function(){
+		 $.fileDownload('/exportRecords',{
+	            httpMethod: "GET"
+	        }).done(function() {}).fail(function() {alert('导出文件失败');});
+	});
+	 $('.batch-import-button').FileUpload({  //选择上传文件
+	        action: '/batchImportRecords',
+	        name: 'recordsExcel',
+	        onComplete: function(id, filename, result){
+	        	layer.msg(result.message);
+	        }
+	  });
+
+	
 	$('.search-button').click(function(){
 		table.ajax.reload();
 	});

@@ -8,6 +8,8 @@
         <script type="text/javascript" src="plugins/jquery/jquery-3.1.1.min.js"></script>
         <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
         <script src="plugins/jquery-cookie/jquery.cookie.js"></script>
+        <script src="plugins/jquery-fileDownload/jquery.fileDownload.js"></script>
+        <script src="plugins/fileupload/fileupload.js"></script>
         <!-- datatables -->
 		<script type="text/javascript" charset="utf8" src="plugins/datatables/jquery.dataTables.js"></script>    
 		<link rel="stylesheet" type="text/css" href="plugins/datatables/jquery.dataTables.css">
