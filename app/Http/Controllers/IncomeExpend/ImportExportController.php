@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Session;
 use App\Models\IncomeExpendRecordModel;
 use App\Util\MVCUtil;
 use App\Enum\TypeEnum;
-use Maatwebsite\Excel\Facades\Excel;
 use Upload\Storage\FileSystem;
 use Upload\File;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Models\IncomeExpendCategoryModel;
+use App\Models\AccountCategoryModel;
 
 
 class ImportExportController extends Controller
@@ -30,7 +32,7 @@ class ImportExportController extends Controller
             $account = $record['account']['name'];
             $incomeExpend = $record['income_expend']['name'];
             $remark = $record['remark'];
-            $d = [$addTime, $type, $account, $incomeExpend, $remark];
+            $d = [$addTime, $type, $money, $account, $incomeExpend, $remark];
             $cellData[] = $d;
         }
         $rowNumber = count($line);
@@ -38,7 +40,7 @@ class ImportExportController extends Controller
         Excel::create($filename , function($excel) use ($cellData, $rowNumber){
             $excel->sheet('收支记录', function($sheet) use ($cellData, $rowNumber){
                 $sheet->freezeFirstRow();
-                $lineNumber = 1;//多少行
+                $lineNumber = 0;//多少行
                 foreach ($cellData as $row){
                     $sheet->appendRow($row);
                     $lineNumber++;
@@ -60,7 +62,7 @@ class ImportExportController extends Controller
     
     public function batchImportRecords(Request $request)
     {
-    	$uploadDir = app()->storagePath().'/upload';
+    	$uploadDir = app()->storagePath().'/upload/';
     	if(!file_exists($uploadDir)) mkdir($uploadDir, 0755, true);
     	$filename = uniqid();
     	$storage = new \Upload\Storage\FileSystem($uploadDir);
@@ -70,17 +72,37 @@ class ImportExportController extends Controller
             /** 上传附件支持'jpg', 'bmp', 'png', 'gif','txt','rar','zip','doc','docx','ini','conf','eml','xls','xlsx' 格式 */
             // new \Upload\Validation\Mimetype(['image/jpg', 'image/jpeg', 'image/bmp', 'image/png', 'image/gif', 'text/plain', 'application/x-rar', 'application/zip', 'application/msword', 'applicationnd.openxmlformats-officedocument.wordprocessingml.document', 'message/rfc822', 'applicationf', 'applicationnd.ms-office', 'applicationnd.openxmlformats-officedocument.spreadsheetml.sheet']),
         ]);
-        $filePath = $uploadDir.$file->getNameWithExtension();
-        $filename .= '.'.$file->getExtension();
+        $file->setName($filename);
+        $filePath = $uploadDir.$filename.'.'.$file->getExtension();
         try {
             $file->upload();
+            $records = [];
             Excel::load($filePath, function($reader){
-               $data = $reader->toArray();
-               echo "<pre>";
-               print_r($data);
-               echo "</pre>";
-               foreach ($data[0] as $cell) {
+               $allData = $reader->toArray();
+               $firstTable = $allData[0];
+               foreach ($firstTable as $i=>$oneLine) {
+                    if($i==0)
+                        continue;
+                    $addTime = $oneLine[1];
+                    $type = $oneLine[2];
+                    $money = $oneLine[3];
+                    $account = $oneLine[4];
+                    $inEx = $oneLine[5];
+                    $remark = $oneLine[6];
+                    if(empty($addTime)||empty($type)||empty($money)||empty($account)||empty($inEx)||empty($remark)){
+                        break;
+                    }
+                    $records[] = [
+                        'add_time' => $addTime,
+                        'user_id' => $this->userId,
+                        'money' => $money,
+                        'type' => TypeEnum::getKey($type),
+                        'account_category_id' => AccountCategoryModel::getIdByName($account),
+                        'income_expend_category_id' => IncomeExpendCategoryModel::getIdByName($inEx),
+                        'remark' => $remark
+                    ];
                }
+               IncomeExpendRecordModel::insert($records);
             });
             unlink($filePath);//删除临时文件
         } catch (\Exception $e) {

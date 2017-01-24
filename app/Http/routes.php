@@ -1,6 +1,5 @@
 <?php
 
-
 Route::group(['namespace'=>'Basic'], function (){
 
 	Route::post('login', 'BasicController@login');
