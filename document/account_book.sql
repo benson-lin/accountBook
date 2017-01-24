@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50505
+Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : account_book
 
 Target Server Type    : MYSQL
-Target Server Version : 50505
+Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-01-21 20:23:32
+Date: 2017-01-24 15:21:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,7 +43,7 @@ CREATE TABLE `sessions` (
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
-INSERT INTO `sessions` VALUES ('76d9bc088c9977c3cec4e782bd28c5eeca75810b', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiUVlvd003R1Z3TTB3OWNHOWR5cWw2RUJRSWNsaUVNVjJ6eE9wNHFXciI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NToiZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo3OiJ1c2VyX2lkIjtpOjE7czo4OiJuaWNrbmFtZSI7czo5OiJiZW5zb25saW4iO3M6OToiX3NmMl9tZXRhIjthOjM6e3M6MToidSI7aToxNDg1MDAxMzU3O3M6MToiYyI7aToxNDg0OTg1NjI1O3M6MToibCI7czoxOiIwIjt9fQ==', '1485001357');
+INSERT INTO `sessions` VALUES ('71979ca087e46b4a1e4d977e4f7f826447e8f4b0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMHJFUUlWc2ZyRVdlWmpRUklTUlVDbVlHMUJ1SXhxVk52RDJYdk9kUiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NToiZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo3OiJ1c2VyX2lkIjtpOjE7czo5OiJfc2YyX21ldGEiO2E6Mzp7czoxOiJ1IjtpOjE0ODQ0ODE3ODQ7czoxOiJjIjtpOjE0ODQ0NTQ3MjI7czoxOiJsIjtzOjE6IjAiO319', '1484481784');
 
 -- ----------------------------
 -- Table structure for `t101_user`
@@ -57,14 +57,12 @@ CREATE TABLE `t101_user` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of t101_user
 -- ----------------------------
 INSERT INTO `t101_user` VALUES ('1', '林泽斌', 'bensonlin', '1', '2017-01-07 20:30:16', '2017-01-07 20:38:20');
-INSERT INTO `t101_user` VALUES ('2', '1212', 'yewang', '23', '2017-01-09 20:10:59', '2017-01-09 20:10:59');
-INSERT INTO `t101_user` VALUES ('3', 'bensonlin', 'test222', '1', '2017-01-14 17:51:35', '2017-01-14 17:51:35');
 
 -- ----------------------------
 -- Table structure for `t102_admin`
@@ -111,17 +109,30 @@ DROP TABLE IF EXISTS `t202_income_expend_category`;
 CREATE TABLE `t202_income_expend_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL COMMENT '收入分类',
+  `type` tinyint(4) DEFAULT NULL COMMENT '1收入，2支出',
+  `remark` text,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='收入分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='收入分类表';
 
 -- ----------------------------
 -- Records of t202_income_expend_category
 -- ----------------------------
-INSERT INTO `t202_income_expend_category` VALUES ('1', '工资', '2017-01-15 16:46:21');
-INSERT INTO `t202_income_expend_category` VALUES ('2', '补贴', '2017-01-15 16:46:24');
-INSERT INTO `t202_income_expend_category` VALUES ('3', '利息', '2017-01-15 16:46:24');
-INSERT INTO `t202_income_expend_category` VALUES ('4', '其它', '2017-01-15 16:46:25');
+INSERT INTO `t202_income_expend_category` VALUES ('1', '工资收入', '1', null, '2017-01-24 11:22:13');
+INSERT INTO `t202_income_expend_category` VALUES ('2', '补贴收入', '1', null, '2017-01-24 11:22:17');
+INSERT INTO `t202_income_expend_category` VALUES ('3', '利息收入', '1', null, '2017-01-24 11:22:21');
+INSERT INTO `t202_income_expend_category` VALUES ('4', '其它收入', '1', null, '2017-01-24 11:22:23');
+INSERT INTO `t202_income_expend_category` VALUES ('18', '衣着消费支出', '2', '包括服装，做衣材料，鞋，袜子等其它穿着用品', '2017-01-24 11:17:00');
+INSERT INTO `t202_income_expend_category` VALUES ('19', '食品消费支出', '2', '包括蔬菜,粮油及其制品,在外用餐,肉,禽,蛋及其制品.鲜奶及奶制品,水产品,调味品,豆制品,烟,酒,茶,糖,干鲜瓜果,饮料,糕点等。 ', '2017-01-24 11:17:27');
+INSERT INTO `t202_income_expend_category` VALUES ('20', '医疗保健服务费支出', '2', '包括药品,及各类健身工具', '2017-01-24 11:17:41');
+INSERT INTO `t202_income_expend_category` VALUES ('21', '交通和通信支出', '2', '包括交通费,交通工具购买费,燃料,维修及零部件,通信工具购买费,通信服务费', '2017-01-24 11:17:55');
+INSERT INTO `t202_income_expend_category` VALUES ('22', '文化和教育费用支出', '2', '包括报名费,学杂费,赞助费,租书费,教材,教育软件,家教费,培训班费等。搜索', '2017-01-24 11:18:05');
+INSERT INTO `t202_income_expend_category` VALUES ('23', '非商品及服务性支出', '2', '房租,水费,电费,煤气费,物业管理费中介费,旅游支出等。', '2017-01-24 11:18:23');
+INSERT INTO `t202_income_expend_category` VALUES ('24', '日杂消费支出', '2', '日常用的东西', '2017-01-24 11:18:30');
+INSERT INTO `t202_income_expend_category` VALUES ('25', '其它支出', '2', '包括理发,洗澡,美容等。', '2017-01-24 11:18:41');
+INSERT INTO `t202_income_expend_category` VALUES ('26', '兼职收入', '1', null, '2017-01-24 11:23:28');
+INSERT INTO `t202_income_expend_category` VALUES ('28', '股票收入', '1', null, '2017-01-24 11:24:40');
+INSERT INTO `t202_income_expend_category` VALUES ('29', '房屋出租收入', '1', null, '2017-01-24 11:30:47');
 
 -- ----------------------------
 -- Table structure for `t301_income_expend_record`
@@ -131,15 +142,15 @@ CREATE TABLE `t301_income_expend_record` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `money` float NOT NULL COMMENT '支出或收入金额',
-  `account_id` int(11) NOT NULL COMMENT '所属账户',
+  `account_category_id` int(11) NOT NULL COMMENT '所属账户',
   `income_expend_category_id` varchar(100) NOT NULL COMMENT '用途',
-  `type` tinyint(1) DEFAULT NULL,
-  `remark` varchar(100) NOT NULL COMMENT '备注',
-  `add_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间',
+  `type` tinyint(1) NOT NULL COMMENT '1收入，2支出',
+  `remark` varchar(100) DEFAULT NULL COMMENT '备注',
+  `add_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='支出收入记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COMMENT='支出收入记录表';
 
 -- ----------------------------
 -- Records of t301_income_expend_record
@@ -173,4 +184,11 @@ INSERT INTO `t301_income_expend_record` VALUES ('27', '1', '10', '1', '1', '2', 
 INSERT INTO `t301_income_expend_record` VALUES ('28', '1', '10', '1', '1', '1', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:53', '2017-01-15 18:43:15');
 INSERT INTO `t301_income_expend_record` VALUES ('29', '1', '10', '1', '1', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:53', '2017-01-15 18:43:15');
 INSERT INTO `t301_income_expend_record` VALUES ('30', '1', '10', '1', '1', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:53', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('31', '1', '200', '3', '4', '1', '备注', '2017-01-21 20:21:59', '2017-01-21 20:22:01', '2017-01-21 20:22:01');
+INSERT INTO `t301_income_expend_record` VALUES ('31', '1', '2', '1', '1', '2', '', '2017-01-24 10:53:23', '2017-01-24 10:21:08', '2017-01-24 10:53:23');
+INSERT INTO `t301_income_expend_record` VALUES ('32', '1', '2', '1', '1', '2', '', '2017-01-24 10:53:22', '2017-01-24 10:30:37', '2017-01-24 10:53:22');
+INSERT INTO `t301_income_expend_record` VALUES ('33', '1', '2', '2', '1', '1', '', '2017-01-24 10:53:24', '2017-01-24 10:31:26', '2017-01-24 10:53:24');
+INSERT INTO `t301_income_expend_record` VALUES ('34', '1', '10', '1', '3', '2', '备注', '2017-01-24 10:46:46', '2017-01-24 10:47:06', '2017-01-24 10:47:06');
+INSERT INTO `t301_income_expend_record` VALUES ('35', '1', '111', '1', '1', '2', '1111', '2017-01-24 10:50:49', '2017-01-24 10:50:56', '2017-01-24 10:50:56');
+INSERT INTO `t301_income_expend_record` VALUES ('36', '1', '20', '1', '1', '2', '1111', '2017-01-24 10:51:19', '2017-01-24 10:51:32', '2017-01-24 10:51:32');
+INSERT INTO `t301_income_expend_record` VALUES ('37', '1', '12', '2', '2', '2', '', '2017-01-09 10:52:26', '2017-01-24 10:52:35', '2017-01-24 10:52:35');
+INSERT INTO `t301_income_expend_record` VALUES ('38', '1', '100', '1', '18', '2', '近距离经历了', '2017-01-24 14:09:27', '2017-01-24 14:09:34', '2017-01-24 14:09:34');
