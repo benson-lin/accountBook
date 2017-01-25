@@ -172,9 +172,40 @@ function getFormListData(){
             		  return row.account.name;
             	  }
               },
-              {data: 'remark'},
+              {
+            	  render: function(data, type, row) {
+            		 return (row.remark || '') ? row.remark :  '--' ;
+            	  }
+              },
               {data: 'create_time'},
-              
+              {
+            	  render: function(data, type, row) {
+            		 return '<a href="#" onclick=modifyRecord('+row.id+') class="modify-record">修改</a><a href="#" onclick=removeRecords('+row.id+') class="remove-record">移除</a>';
+            	  }
+              },
          ],
 	});
+}
+
+function removeRecords(recordId){
+	
+	$.ajax({
+		type: "POST", 
+		url: "/removeRecords", 
+		dataType: "json",
+		data: {
+			id: recordId,
+		},
+		success: function(result){ 
+			if(result.code==0) {
+				layer.msg(result.message);
+				table.ajax.reload();
+			}else{
+				layer.msg(result.message);
+			}
+		} 
+	});
+}
+
+function modifyRecord(recordId){
 }

@@ -130,12 +130,12 @@ class IncomeExpendController extends Controller {
 	    return MVCUtil::getResponseContent(self::RET_SUCC);
 	}
 	
-	public function removeRecord(Request $request)
+	public function removeRecords(Request $request)
 	{
 	    $recordId = $request->input("id");
 	    $userId = Session::get('user_id');
 	    //需要加上user_id，防止恶意删除其他用户的
 	    IncomeExpendRecordModel::where('id', $recordId)->where('user_id', $userId)->delete();
-	    return MVCUtil::getResponseContent(self::RET_SUCC);
+	    return MVCUtil::getResponseContent(self::RET_SUCC, "移除成功");
 	}
 }
