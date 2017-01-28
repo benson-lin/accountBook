@@ -1,5 +1,9 @@
 <?php
 
+Route::get('/phpinfo', function(){
+	phpinfo();
+});
+
 Route::group(['namespace'=>'Basic'], function (){
 
 	Route::post('login', 'BasicController@login');
@@ -24,6 +28,7 @@ Route::group(['middleware'=>['check.login'], 'namespace'=>'IncomeExpend'], funct
     Route::post('/batchImportRecords', 'ImportExportController@batchImportRecords');
     Route::get('/getCategoryMap', 'IncomeExpendController@getCategoryMap');
     Route::get('/statistics', 'ChartController@statistics');
+    Route::get('/lineChart', 'ChartController@lineChart');
 });
 
 
