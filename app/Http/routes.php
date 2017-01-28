@@ -29,6 +29,9 @@ Route::group(['middleware'=>['check.login'], 'namespace'=>'IncomeExpend'], funct
     Route::get('/getCategoryMap', 'IncomeExpendController@getCategoryMap');
     Route::get('/statistics', 'ChartController@statistics');
     Route::get('/lineChart', 'ChartController@lineChart');
+    Route::get('/barChart', 'ChartController@barChart');
+    
+    Route::get('/getRemainMoneyByAccount', 'ChartController@getRemainMoneyByAccount');
 });
 
 

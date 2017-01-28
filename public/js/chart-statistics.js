@@ -1,8 +1,122 @@
 $(function(){
+	
+	getRemainMoneyByAccount();
+	barChart();
 	lineChart();
 });
 
+function barChart(){//饼图
+	var expendRecords = [];
+	var incomeRecords = [];
+	var incomeAccountNames = [];
+	var expendAccountNames = [];
+	$.ajax({
+		type: "GET", 
+		url: "/barChart", 
+		dataType: "json",
+		async : false,
+		success: function(result){ 
+			if(result.code==0) {
+				incomeAccountNames = result.data.incomeAccountNames;
+				incomeRecords = result.data.incomeRecords;
+				expendAccountNames = result.data.expendAccountNames;
+				expendRecords = result.data.expendRecords;
+			}
+		} 
+	});
+	var incomeBarChart = echarts.init(document.getElementById('income-bar-chart'));
+	var incomeOption = {
+		    title : {
+		        text: '近一个月收入金额比例',
+//		        subtext: '纯属虚构',
+		        x:'center'
+		    },
+		    tooltip : {
+		        trigger: 'item',
+		        formatter: "{a} <br/>{b} : {c} ({d}%)"
+		    },
+		    legend: {
+		        orient: 'vertical',
+		        left: 'left',
+		        data: incomeAccountNames
+		    },
+		    series : [
+		        {
+		            name: '账户',
+		            type: 'pie',
+		            radius : '45%',
+		            center: ['50%', '40%'],
+		            data: incomeRecords,
+		            itemStyle: {
+		                emphasis: {
+		                    shadowBlur: 10,
+		                    shadowOffsetX: 0,
+		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+		                }
+		            }
+		        }
+		    ]
+		};
 
+	incomeBarChart.setOption(incomeOption);
+	
+	
+	
+	var expendBarChart = echarts.init(document.getElementById('expend-bar-chart'));
+	var expendOption = {
+		    title : {
+		        text: '近一个月支出金额比例',
+//		        subtext: '纯属虚构',
+		        x:'center'
+		    },
+		    tooltip : {
+		        trigger: 'item',
+		        formatter: "{a} <br/>{b} : {c} ({d}%)"
+		    },
+		    legend: {
+		        orient: 'vertical',
+		        left: 'left',
+		        data: expendAccountNames
+		    },
+		    series : [
+		        {
+		            name: '账户',
+		            type: 'pie',
+		            radius : '45%',
+		            center: ['50%', '40%'],
+		            data: expendRecords,
+		            itemStyle: {
+		                emphasis: {
+		                    shadowBlur: 10,
+		                    shadowOffsetX: 0,
+		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+		                }
+		            }
+		        }
+		    ]
+		};
+
+	expendBarChart.setOption(expendOption);
+	
+}
+
+function getRemainMoneyByAccount() {
+	$.ajax({
+		type: "GET", 
+		url: "/getRemainMoneyByAccount", 
+		dataType: "json",
+		success: function(result){ 
+			if(result.code==0) {
+				$data = result.data;
+				$.each($data, function(index, remainMoney){
+					account = remainMoney['name'];
+					remainMoney = remainMoney['money'];
+					$("#main-data").append('<p class="text-primary">'+account+": "+remainMoney+'元</p>');
+				});
+			}
+		} 
+	});
+}
 function lineChart(){//折线图
 	//七天内的收支
 	var expend = [];
@@ -22,86 +136,78 @@ function lineChart(){//折线图
 		} 
 	});
 	var lineChart = echarts.init(document.getElementById('line-chart'));
-	option = {
-		    title : {
+	var option = {
+		    title: {
 		        text: '七天内收支记录',
 //		        subtext: '纯属虚构'
 		    },
-		    tooltip : {
+		    tooltip: {
 		        trigger: 'axis'
 		    },
 		    legend: {
-		        data:['收入','支出']
+		    	data:['收入','支出']
 		    },
 		    toolbox: {
-		        show : true,
-		        feature : {
-		            dataView : {show: true, readOnly: false},
-		            magicType : {show: true, type: ['line', 'bar']},
-		            restore : {show: true},
-		            saveAsImage : {show: true}
+		        show: true,
+		        feature: {
+		            dataZoom: {},
+		            dataView: {readOnly: false},
+		            magicType: {type: ['line', 'bar']},
+		            restore: {},
+		            saveAsImage: {}
 		        }
 		    },
-		    calculable : true,
-		    xAxis : [
-		        {
-		            type : 'category',
-		            data : sevenDates//['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+		    xAxis:  {
+		        type: 'category',
+		        boundaryGap: false,
+		        data: sevenDates, //['周一','周二','周三','周四','周五','周六','周日']
+		    },
+		    yAxis: {
+		        type: 'value',
+		        axisLabel: {
+		            formatter: '{value} 元'
 		        }
-		    ],
-		    yAxis : [
-		        {
-		            type : 'value'
-		        }
-		    ],
-		    series : [
+		    },
+		    series: [
 		        {
 		            name:'收入',
-		            type:'bar',
-		            data: income, //[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6],
-		            markPoint : {
-		                data : [
-		                    {type : 'max', name: '最大值'},
-		                    {type : 'min', name: '最小值'}
+		            type:'line',
+		            data: income, //[11, 11, 15, 13, 12, 13, 10],
+		            markPoint: {
+		                data: [
+		                    {type: 'max', name: '最大值'},
+		                    {type: 'min', name: '最小值'}
 		                ]
 		            },
-		            markLine : {
-		                data : [
-		                    {type : 'average', name: '平均值'}
+		            markLine: {
+		                data: [
+		                    {type: 'average', name: '平均值'}
 		                ]
 		            }
 		        },
 		        {
 		            name:'支出',
-		            type:'bar',
-		            data: expend, //[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6],
-		            markPoint : {
-		            	 data : [
-				                    {type : 'max', name: '最大值'},
-				                    {type : 'min', name: '最小值'}
-				         ]
-//		                data : [
-//		                    {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183},
-//		                    {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
-//		                ]
+		            type:'line',
+		            data: expend, //[1, -2, 2, 5, 3, 2, 0],
+		            markPoint: {
+		                data: [
+		                    {type: 'max', name: '最大值'},
+		                    {type: 'min', name: '最小值'}
+		                ]
 		            },
-		            markLine : {
-		                data : [
-		                    {type : 'average', name : '平均值'}
+		            markLine: {
+		                data: [
+		                    {type: 'average', name: '平均值'}
 		                ]
 		            }
 		        }
 		    ]
 		};
 
-
     lineChart.setOption(option);
 
 }
 
-function barChart(){//饼图
-	
-}
 
 function example(){//例子
 	

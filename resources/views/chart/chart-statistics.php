@@ -11,7 +11,6 @@
 		<script src="/js/common.js"></script>
     </head>
 <body>
-    <body>
     <div class="body">
     	<div class="top">
         	<span>Account Book</span>
@@ -41,13 +40,19 @@
     			</div>
     		</div>    
     	    <div class="main col-sm-10 ">
-				<div id="line-chart" style="width: 800px;height:400px;">
-				
+    	    	<div class="col-sm-2" id="main-data">
+    	    		<span>余额：</span>
+    	    	</div>
+				<div class="col-sm-10" id="main-chart">
+					<div class="col-sm-6" id="line-chart" style="width: 800px;height:400px;"></div>
+					<div class="col-sm-2" id="income-bar-chart" style="width: 500px;height:400px;"></div>
+					<div class="col-sm-2" id="expend-bar-chart" style="width: 500px;height:400px;"></div>
 				</div>    		    
     		</div>    
         
         </div>
     </div>
     <script type="text/javascript" src="js/chart-statistics.js"></script>
-    </body>
+    <link rel="stylesheet" type="text/css" href="css/chart-statistics.css">
+</body>
 </html>

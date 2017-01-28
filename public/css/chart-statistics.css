@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+#main-data{
+	width:100%;
+	border: 1px solid #fff;
+	margin-bottom: 30px;
+	margin-top: 10px;
+}
+#main-data span {
+	display: block;
+	font-size: 18px;
+}
+#main-data p{
+	display: inline;
+	text-align: left;
+	font-size: 15px;
+	line-height: 30px;
+	margin-left: 20px;
+}
+
+#line-chart{
+	margin-bottom: 40px;
+}
+
+#income-bar-chart {
+	margin-right: 20px;
+}
