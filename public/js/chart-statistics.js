@@ -27,7 +27,7 @@ function barChart(){//饼图
 	var incomeBarChart = echarts.init(document.getElementById('income-bar-chart'));
 	var incomeOption = {
 		    title : {
-		        text: '近一个月收入金额比例',
+		        text: '近一个月收入比例',
 //		        subtext: '纯属虚构',
 		        x:'center'
 		    },
@@ -65,7 +65,7 @@ function barChart(){//饼图
 	var expendBarChart = echarts.init(document.getElementById('expend-bar-chart'));
 	var expendOption = {
 		    title : {
-		        text: '近一个月支出金额比例',
+		        text: '近一个月支出比例',
 //		        subtext: '纯属虚构',
 		        x:'center'
 		    },
@@ -138,7 +138,7 @@ function lineChart(){//折线图
 	var lineChart = echarts.init(document.getElementById('line-chart'));
 	var option = {
 		    title: {
-		        text: '七天内收支记录',
+		        text: '7天内收支记录',
 //		        subtext: '纯属虚构'
 		    },
 		    tooltip: {

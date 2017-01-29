@@ -71,13 +71,15 @@ class ChartController extends Controller {
 	
 	//近一个月收入支出比例
 	public function barChart() {
-		$incomeRecords = IncomeExpendRecordModel::select('account_category_id', DB::RAW('sum(money) as money'))
+		$incomeRecords = IncomeExpendRecordModel::select('income_expend_category_id', DB::RAW('sum(money) as money'))
 			->where('user_id', $this->userId)->where('type', 1)->whereBetween('add_time', [date("Y-m-d 00:00:00", strtotime("-30 day")), date("Y-m-d 00:00:00", strtotime("0 day"))])
-			->with('account')->groupBy('account_category_id')->get()->toArray();
+			->with('incomeExpend')->groupBy('income_expend_category_id')->get()->toArray();
 		$incomeR = [];
 		$incomeAccountNames = [];
+// 		print_r($incomeRecords);
+// 		return;
 		foreach ($incomeRecords as $r) {
-			$name = $r['account']['name'];
+			$name = $r['income_expend']['name'];
 			$incomeAccountNames[] = $name;
 			$value = $r['money'];
 			$oneR = ['name'=>$name, 'value'=>$value];
@@ -85,13 +87,13 @@ class ChartController extends Controller {
 		}
 		
 		
-		$expendRecords = IncomeExpendRecordModel::select('account_category_id', DB::RAW('sum(money) as money'))
+		$expendRecords = IncomeExpendRecordModel::select('income_expend_category_id', DB::RAW('sum(money) as money'))
 			->where('user_id', $this->userId)->where('type', 2)->whereBetween('add_time', [date("Y-m-d 00:00:00", strtotime("-30 day")), date("Y-m-d 00:00:00", strtotime("0 day"))])
-			->with('account')->groupBy('account_category_id')->get()->toArray();
+			->with('incomeExpend')->groupBy('income_expend_category_id')->get()->toArray();
 		$expendR = [];
 		$expendAccountNames = [];
 		foreach ($expendRecords as $r) {
-			$name = $r['account']['name'];
+			$name = $r['income_expend']['name'];
 			$expendAccountNames[] = $name;
 			$value = $r['money'];
 			$oneR = ['name'=>$name, 'value'=>$value];
@@ -104,4 +106,41 @@ class ChartController extends Controller {
 				'expendAccountNames' => $expendAccountNames,
 		]);
 	}
+	
+	
+	//近一个月收入支出比例：按账号分类
+// 	public function barChart() {
+// 		$incomeRecords = IncomeExpendRecordModel::select('account_category_id', DB::RAW('sum(money) as money'))
+// 		->where('user_id', $this->userId)->where('type', 1)->whereBetween('add_time', [date("Y-m-d 00:00:00", strtotime("-30 day")), date("Y-m-d 00:00:00", strtotime("0 day"))])
+// 		->with('account')->groupBy('account_category_id')->get()->toArray();
+// 		$incomeR = [];
+// 		$incomeAccountNames = [];
+// 		foreach ($incomeRecords as $r) {
+// 			$name = $r['account']['name'];
+// 			$incomeAccountNames[] = $name;
+// 			$value = $r['money'];
+// 			$oneR = ['name'=>$name, 'value'=>$value];
+// 			$incomeR[] = $oneR;
+// 		}
+	
+	
+// 		$expendRecords = IncomeExpendRecordModel::select('account_category_id', DB::RAW('sum(money) as money'))
+// 		->where('user_id', $this->userId)->where('type', 2)->whereBetween('add_time', [date("Y-m-d 00:00:00", strtotime("-30 day")), date("Y-m-d 00:00:00", strtotime("0 day"))])
+// 		->with('account')->groupBy('account_category_id')->get()->toArray();
+// 		$expendR = [];
+// 		$expendAccountNames = [];
+// 		foreach ($expendRecords as $r) {
+// 			$name = $r['account']['name'];
+// 			$expendAccountNames[] = $name;
+// 			$value = $r['money'];
+// 			$oneR = ['name'=>$name, 'value'=>$value];
+// 			$expendR[] = $oneR;
+// 		}
+// 		return MVCUtil::getResponseContent(self::RET_SUCC, '', [
+// 				'incomeRecords'=>$incomeR,
+// 				'incomeAccountNames' => $incomeAccountNames,
+// 				'expendRecords'=>$expendR,
+// 				'expendAccountNames' => $expendAccountNames,
+// 		]);
+// 	}
 }

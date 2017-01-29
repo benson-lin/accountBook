@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-01-24 15:21:29
+Date: 2017-01-28 22:41:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,7 +43,6 @@ CREATE TABLE `sessions` (
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
-INSERT INTO `sessions` VALUES ('71979ca087e46b4a1e4d977e4f7f826447e8f4b0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMHJFUUlWc2ZyRVdlWmpRUklTUlVDbVlHMUJ1SXhxVk52RDJYdk9kUiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NToiZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo3OiJ1c2VyX2lkIjtpOjE7czo5OiJfc2YyX21ldGEiO2E6Mzp7czoxOiJ1IjtpOjE0ODQ0ODE3ODQ7czoxOiJjIjtpOjE0ODQ0NTQ3MjI7czoxOiJsIjtzOjE6IjAiO319', '1484481784');
 
 -- ----------------------------
 -- Table structure for `t101_user`
@@ -57,7 +56,7 @@ CREATE TABLE `t101_user` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of t101_user
@@ -150,45 +149,16 @@ CREATE TABLE `t301_income_expend_record` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COMMENT='支出收入记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=280 DEFAULT CHARSET=utf8 COMMENT='支出收入记录表';
 
 -- ----------------------------
 -- Records of t301_income_expend_record
 -- ----------------------------
-INSERT INTO `t301_income_expend_record` VALUES ('1', '1', '10', '2', '2', '1', '121', '2017-01-12 18:43:15', '2017-01-15 16:22:56', '2017-01-15 18:43:32');
-INSERT INTO `t301_income_expend_record` VALUES ('2', '1', '11', '2', '2', '1', '1212', '2017-01-15 18:43:15', '2017-01-15 16:58:48', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('4', '1', '10', '1', '1', '2', 'test', '2017-01-03 18:43:15', '2017-01-15 17:00:48', '2017-01-15 18:43:35');
-INSERT INTO `t301_income_expend_record` VALUES ('5', '1', '10', '1', '1', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:48', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('6', '1', '10', '1', '1', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:49', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('7', '1', '10', '2', '2', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:49', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('8', '1', '10', '3', '3', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:49', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('9', '1', '10', '1', '1', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:49', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('10', '1', '10', '1', '1', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:49', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('11', '1', '10', '1', '1', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:50', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('12', '1', '10', '1', '1', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:50', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('13', '1', '10', '1', '1', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:50', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('14', '1', '10', '1', '1', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:50', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('15', '1', '10', '1', '1', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:50', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('16', '1', '10100', '1', '1', '1', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:51', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('17', '1', '100', '1', '1', '1', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:51', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('18', '1', '100', '1', '1', '1', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:51', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('19', '1', '100', '1', '1', '1', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:51', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('20', '1', '1001', '1', '1', '1', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:51', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('21', '1', '10', '1', '1', '1', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:52', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('22', '1', '10', '1', '1', '1', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:52', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('23', '1', '10', '1', '1', '1', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:52', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('24', '1', '10', '1', '1', '1', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:52', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('25', '1', '10', '1', '1', '1', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:52', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('26', '1', '10', '1', '1', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:53', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('27', '1', '10', '1', '1', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:53', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('28', '1', '10', '1', '1', '1', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:53', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('29', '1', '10', '1', '1', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:53', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('30', '1', '10', '1', '1', '2', 'test', '2017-01-15 18:43:15', '2017-01-15 17:00:53', '2017-01-15 18:43:15');
-INSERT INTO `t301_income_expend_record` VALUES ('31', '1', '2', '1', '1', '2', '', '2017-01-24 10:53:23', '2017-01-24 10:21:08', '2017-01-24 10:53:23');
-INSERT INTO `t301_income_expend_record` VALUES ('32', '1', '2', '1', '1', '2', '', '2017-01-24 10:53:22', '2017-01-24 10:30:37', '2017-01-24 10:53:22');
-INSERT INTO `t301_income_expend_record` VALUES ('33', '1', '2', '2', '1', '1', '', '2017-01-24 10:53:24', '2017-01-24 10:31:26', '2017-01-24 10:53:24');
-INSERT INTO `t301_income_expend_record` VALUES ('34', '1', '10', '1', '3', '2', '备注', '2017-01-24 10:46:46', '2017-01-24 10:47:06', '2017-01-24 10:47:06');
-INSERT INTO `t301_income_expend_record` VALUES ('35', '1', '111', '1', '1', '2', '1111', '2017-01-24 10:50:49', '2017-01-24 10:50:56', '2017-01-24 10:50:56');
-INSERT INTO `t301_income_expend_record` VALUES ('36', '1', '20', '1', '1', '2', '1111', '2017-01-24 10:51:19', '2017-01-24 10:51:32', '2017-01-24 10:51:32');
-INSERT INTO `t301_income_expend_record` VALUES ('37', '1', '12', '2', '2', '2', '', '2017-01-09 10:52:26', '2017-01-24 10:52:35', '2017-01-24 10:52:35');
-INSERT INTO `t301_income_expend_record` VALUES ('38', '1', '100', '1', '18', '2', '近距离经历了', '2017-01-24 14:09:27', '2017-01-24 14:09:34', '2017-01-24 14:09:34');
+INSERT INTO `t301_income_expend_record` VALUES ('272', '1', '10000', '1', '1', '1', '初始化金额', '2017-01-22 21:21:10', '2017-01-28 21:21:22', '2017-01-28 21:21:22');
+INSERT INTO `t301_income_expend_record` VALUES ('273', '1', '500', '2', '4', '1', '老大红包', '2017-01-22 21:21:34', '2017-01-28 21:21:56', '2017-01-28 21:21:56');
+INSERT INTO `t301_income_expend_record` VALUES ('274', '1', '30', '1', '19', '2', '吃饭', '2017-01-22 21:22:23', '2017-01-28 21:22:37', '2017-01-28 21:22:37');
+INSERT INTO `t301_income_expend_record` VALUES ('275', '1', '200', '1', '18', '2', '春节买衣服', '2017-01-23 21:22:52', '2017-01-28 21:23:34', '2017-01-28 21:23:34');
+INSERT INTO `t301_income_expend_record` VALUES ('276', '1', '200', '2', '21', '2', 'test', '2017-01-25 21:23:49', '2017-01-28 21:24:05', '2017-01-28 21:24:05');
+INSERT INTO `t301_income_expend_record` VALUES ('277', '1', '999', '4', '1', '1', '', '2017-01-26 22:18:33', '2017-01-28 22:18:51', '2017-01-28 22:18:51');
+INSERT INTO `t301_income_expend_record` VALUES ('278', '1', '50', '4', '18', '2', '', '2017-01-26 22:19:09', '2017-01-28 22:19:27', '2017-01-28 22:19:27');
+INSERT INTO `t301_income_expend_record` VALUES ('279', '1', '500', '3', '1', '1', '天降红包', '2017-01-27 22:37:22', '2017-01-28 22:37:49', '2017-01-28 22:37:49');

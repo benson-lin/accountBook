@@ -45,8 +45,8 @@
     	    	</div>
 				<div class="col-sm-10" id="main-chart">
 					<div class="col-sm-6" id="line-chart" style="width: 800px;height:400px;"></div>
-					<div class="col-sm-2" id="income-bar-chart" style="width: 500px;height:400px;"></div>
 					<div class="col-sm-2" id="expend-bar-chart" style="width: 500px;height:400px;"></div>
+					<div class="col-sm-2" id="income-bar-chart" style="width: 500px;height:400px;"></div>
 				</div>    		    
     		</div>    
         
