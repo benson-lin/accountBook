@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-01-28 22:41:02
+Date: 2017-01-31 10:29:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -145,8 +145,8 @@ CREATE TABLE `t301_income_expend_record` (
   `income_expend_category_id` varchar(100) NOT NULL COMMENT '用途',
   `type` tinyint(1) NOT NULL COMMENT '1收入，2支出',
   `remark` varchar(100) DEFAULT NULL COMMENT '备注',
-  `add_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间',
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `add_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '记录时间',
+  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=280 DEFAULT CHARSET=utf8 COMMENT='支出收入记录表';
