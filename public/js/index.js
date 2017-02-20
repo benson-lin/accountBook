@@ -197,7 +197,7 @@ function getFormListData(){
               {data: 'create_time'},
               {
             	  render: function(data, type, row) {
-            		 return '<a href="#" onclick=modifyRecord('+row.id+') class="modify-record">修改</a><a href="#" onclick=removeRecords('+row.id+') class="remove-record">移除</a>';
+            		 return '<a href="#" onclick=removeRecords('+row.id+') class="remove-record">移除</a>';
             	  }
               },
          ],
@@ -206,23 +206,31 @@ function getFormListData(){
 
 function removeRecords(recordId){
 	
-	$.ajax({
-		type: "POST", 
-		url: "/removeRecords", 
-		dataType: "json",
-		data: {
-			id: recordId,
-		},
-		success: function(result){ 
-			if(result.code==0) {
-				layer.msg(result.message);
-				table.ajax.reload();
-			}else{
-				layer.msg(result.message);
-			}
-		} 
+	layer.confirm('是否移除该记录？', {
+		  btn: ['是','否'] //按钮
+	}, function(){
+		$.ajax({
+			type: "POST", 
+			url: "/removeRecords", 
+			dataType: "json",
+			data: {
+				id: recordId,
+			},
+			success: function(result){ 
+				if(result.code==0) {
+					layer.msg(result.message, {icon: 1});
+					table.ajax.reload();
+				}else{
+					layer.msg(result.message);
+				}
+			} 
+		});
+	  
+	}, function(){
+//	  layer.msg('也可以这样', {
+//	    time: 20000, //20s后自动关闭
+//	    btn: ['明白了', '知道了']
+//	  });
 	});
-}
 
-function modifyRecord(recordId){
 }

@@ -3,7 +3,6 @@
 $(function(){
 	user = getUserInfo();
 	$("#nickname").text(user.nickname);
-	console.log(user.nickname);
 });
 
 
