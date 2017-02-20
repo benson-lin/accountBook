@@ -24,7 +24,7 @@ Route::group(['middleware'=>['check.login'], 'namespace'=>'IncomeExpend'], funct
     Route::get('/queryRecords', 'IncomeExpendController@queryRecords');
     Route::post('/addRecord', 'IncomeExpendController@addRecord');
     Route::post('/removeRecords', 'IncomeExpendController@removeRecords');
-    Route::get('/exportRecords', 'ImportExportController@exportRecords');
+    Route::post('/exportRecords', 'ImportExportController@exportRecords');
     Route::post('/batchImportRecords', 'ImportExportController@batchImportRecords');
     Route::get('/getCategoryMap', 'IncomeExpendController@getCategoryMap');
     Route::get('/statistics', 'ChartController@statistics');

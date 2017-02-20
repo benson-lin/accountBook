@@ -8,8 +8,25 @@ $(function(){
 
 function initEvent(){
 	$('.batch-export-button').click(function(){
+		var data = {};
+ 		var account = $('.account-options').val();
+		var moneyBegin = $("input[name=money-begin]").val();
+		var moneyEnd = $("input[name=money-end]").val();
+		var inExpend = $('.in-ex-category-options').val();
+		var addTimeBegin = $("input[name=add-time-begin]").val();
+		var addTimeEnd = $("input[name=add-time-end]").val();
+		var remark = $("input[name=remark]").val();
+		data.addTimeGreater = addTimeBegin;
+		data.addTimeLess = addTimeEnd;
+		data.moneyGreater = moneyBegin;
+		data.moneyLess = moneyEnd;
+		data.accountCategoryId = account;
+		data.remark = remark;
+		data.incomeExpendCategoryId = inExpend;
+		
 		 $.fileDownload('/exportRecords',{
-	            httpMethod: "GET"
+	            httpMethod: "POST",
+	            data : data
 	        }).done(function() {}).fail(function() {alert('导出文件失败');});
 	});
 	 $('.batch-import-button').FileUpload({  //选择上传文件
@@ -109,11 +126,11 @@ function initQueryMap(){
 
 function initDateTimePicker(){
 	$('#add-time-begin').datetimepicker({
-		format: 'YYYY-MM-DD',
+		format: 'YYYY-MM-DD 00:00:00',
 		locale: 'zh-cn',
 	});
 	$('#add-time-end').datetimepicker({
-		format: 'YYYY-MM-DD',
+		format: 'YYYY-MM-DD 23:59:59',
 		locale: 'zh-cn',
 	});
 }

@@ -107,8 +107,11 @@
     		    	</div>
     		    		    	
     		    	<div class="form-group button-form">
-    		    		<div class="col-sm-4 col-sm-offset-3">
+    		    		<div class="col-sm-1 col-sm-offset-3">
     		    			<button name="search-button" class="btn btn-primary search-button">查询</button>
+    		    		</div>
+    		    		<div class="col-sm-1 batch-export">
+    		    			<button name="batch-export" class="btn btn-default batch-export-button">批量导出</button>
     		    		</div>
     		    	</div>
     		    </div>
@@ -119,9 +122,7 @@
     		    	<div class="col-sm-1 batch-import">
     		    			<button name="batch-import" class="btn btn-default batch-import-button">批量导入</button>
     		    	</div>
-    		    	<div class="col-sm-1 batch-export">
-    		    			<button name="batch-export" class="btn btn-default batch-export-button">批量导出</button>
-    		    	</div>
+
     		    </div>
     			<div id="list">
     				<table id="myTable" class="display">

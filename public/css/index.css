@@ -16,21 +16,10 @@
 	top: 15px;
 }
 
-.bottom .add-import-export-record .batch-export{
-	position: absolute;
-	left: 180px;
-	top: 15px;
-}
-
-.bottom .add-import-export-record .col-sm-1{
-	padding: 0px;
-}
 .bottom .main #search{
 	background-color: #FFF;
 	padding: 15px;
 }
-
-
 
 .bottom .main #search .search-form {
 	marigin: 10px 0 0 30px;

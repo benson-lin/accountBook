@@ -17,10 +17,61 @@ use App\Models\AccountCategoryModel;
 class ImportExportController extends Controller
 {
     
-    public function exportRecords()
+    public function exportRecords(Request $request)
     {
-        $userId = Session::get('user_id');
-        $records = IncomeExpendRecordModel::where('user_id', $userId)->with('account')->with('incomeExpend')->orderBy('add_time', 'desc')->get()->toArray();
+    	$createTimeGreater = $request->input("createTimeGreater");
+    	$createTimeLess = $request->input("createTimeLess");
+    	$addTimeGreater = $request->input("addTimeGreater");
+    	$addTimeLess = $request->input("addTimeLess");
+    	$updateTimeGreater = $request->input("updateTimeGreater");
+    	$updateTimeLess = $request->input("updateTimeLess");
+    	$moneyGreater = $request->input("moneyGreater");
+    	$moneyLess = $request->input("moneyLess");
+    	$accountCategoryId = $request->input("accountCategoryId");
+    	$incomeExpendCategoryId = $request->input("incomeExpendCategoryId");
+    	$type = $request->input("type");//1是收入的id，2是支出的id
+    	$remark = $request->input("remark");
+    	$userId = Session::get('user_id');
+    	 
+    	$builder = IncomeExpendRecordModel::where('user_id', $userId);
+    	if (!empty($createTimeGreater)) {
+    		$builder = $builder->where('create_time', '>=', $createTimeGreater);
+    	}
+    	if (!empty($createTimeLess)) {
+    		$builder = $builder->where('create_time', '<=', $createTimeLess);
+    	}
+    	if (!empty($addTimeGreater)) {
+    		$builder = $builder->where('add_time', '>=', $addTimeGreater);
+    	}
+    	if (!empty($addTimeLess)) {
+    		$builder = $builder->where('add_time', '<=', $addTimeLess);
+    	}
+    	if (!empty($updateTimeGreater)) {
+    		$builder = $builder->where('update_time', '>=', $updateTimeGreater);
+    	}
+    	if (!empty($updateTimeLess)) {
+    		$builder = $builder->where('update_time', '<=', $updateTimeLess);
+    	}
+    	if (!empty($moneyLess)) {
+    		$builder = $builder->where('money', '<=', $moneyLess);
+    	}
+    	if (!empty($moneyGreater)) {
+    		$builder = $builder->where('money', '>=', $moneyGreater);
+    	}
+    	if (!empty($accountCategoryId)) {
+    		$builder = $builder->where('account_category_id', $accountCategoryId);
+    	}
+    	if (!empty($incomeExpendCategoryId)) {
+    		$builder = $builder->where('income_expend_category_id', $incomeExpendCategoryId);
+    	}
+    	if (!empty($type)) {
+    		$builder = $builder->where('type', $type);
+    	}
+    	if (!empty($remark)) {
+    		$builder = $builder->where('remark', 'like', '%'.$remark.'%');
+    	}
+    	
+        $records = $builder->with('account')->with('incomeExpend')->orderBy('add_time', 'desc')->get()->toArray();
         
         $line = ['时间', '类型', '金额', '账户', '用途/来源', '备注'];
         $cellData[] = $line;
