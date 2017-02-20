@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\IncomeExpend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\IncomeExpendRecordModel;
 use App\Util\MVCUtil;
 use Illuminate\Support\Facades\DB;
-use App\Models\AccountCategoryModel;
 
 class ChartController extends Controller {
 	

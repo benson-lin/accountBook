@@ -9,6 +9,8 @@ use App\Models\IncomeExpendRecordModel;
 use App\Util\MVCUtil;
 use App\Models\AccountCategoryModel;
 use App\Models\IncomeExpendCategoryModel;
+use Illuminate\Support\Facades\DB;
+use App\Util\ToolUtil;
 
 class IncomeExpendController extends Controller {
 	
@@ -86,6 +88,19 @@ class IncomeExpendController extends Controller {
 	    $accountCategoryId = $request->input("accountCategoryId");
 	    $incomeExpendCategoryId = $request->input("incomeExpendCategoryId");
 	    $remark = $request->input("remark");
+	    
+	    //获取某个列表下的剩余金额，如果是支出，不允许超过这个金额
+	    if ($type == 2) {
+	    	$accountInfo = IncomeExpendRecordModel::where("account_category_id", $accountCategoryId)
+	    		->select('user_id', 'account_category_id', DB::raw('sum(case when type=1 then money else (-1)*money end) as money'))->get()->toArray();
+	    	
+	    	$restMoney = $accountInfo[0]['money'];
+	    	if ($restMoney < $money) {
+	    		$account = AccountCategoryModel::getAccountById($accountCategoryId);
+	    		return MVCUtil::getResponseContent(self::RET_FAIL, '余额不足, 当前账户('.$account['name'].')下余额为：'.$restMoney);
+	    	}
+	    }
+
         IncomeExpendRecordModel::insert([
             'user_id' => $this->userId,
             'money' => $money,

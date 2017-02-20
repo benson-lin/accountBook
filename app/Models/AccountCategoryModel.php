@@ -21,4 +21,9 @@ class AccountCategoryModel extends Model
         return $model['id'];
     }
     
+    public static function getAccountById($id) {
+    	$account = AccountCategoryModel::find($id);
+    	return $account;
+    }
+    
 }

@@ -27,5 +27,6 @@ class IncomeExpendRecordModel extends Model
     public function incomeExpend() {
         return $this->belongsTo('App\Models\IncomeExpendCategoryModel', 'income_expend_category_id', 'id');
     }
-
+    
+    
 }
