@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Mail;
 
 class BasicController extends Controller {
 	
+	const KEY = '^$t^JwqDD1n7D^YL';
+	
     public function index()
     {
         return response()->view('index');
@@ -49,15 +51,14 @@ class BasicController extends Controller {
 		
 		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
 		$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-		$key = '^$t^JwqDD1n7D^YL';
 		$text = $email;		
 		
-		$cryptText = urlencode(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $text, MCRYPT_MODE_ECB, $iv)));
+		$cryptText = urlencode(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::KEY, $text, MCRYPT_MODE_ECB, $iv)));
 		Session::set($email.'-email', $email);
 		Session::set($email.'-nickname', $nickname);
 		Session::set($email.'-password', $password);
 		Session::save();
-		$flag = Mail::send('mail.register', ['text'=> $cryptText],function($message) use($email){
+		$flag = Mail::send('basic.mail', ['text'=> $cryptText],function($message) use($email){
 			$to = $email;
 			$message ->to($to)->subject('账簿系统注册通知');
 		});
@@ -72,9 +73,8 @@ class BasicController extends Controller {
 	{
 		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
 		$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-		$key = '^$t^JwqDD1n7D^YL';
 		$crypttext = $request->input('data');
-		$email = mcrypt_decrypt(MCRYPT_RIJNDAEL_256,$key,base64_decode($crypttext),MCRYPT_MODE_ECB,$iv);
+		$email = mcrypt_decrypt(MCRYPT_RIJNDAEL_256,self::KEY,base64_decode($crypttext),MCRYPT_MODE_ECB,$iv);
 		$email = str_replace("\0", "", $email);
 		$sessionMail = $email.'-email';
 		if(Session::has($sessionMail) && Session::get($sessionMail) == $email) {
@@ -83,18 +83,18 @@ class BasicController extends Controller {
 			$user = UserModel::where('email', $email)->get()->toArray();
 			if(!empty($user)){//用户已存在
 				Session::forget($sessionMail);
-				return response()->view('mail.register-fail',[
+				return response()->view('basic.register-fail',[
 						'msg' => '邮箱已被注册'
 				]);
 
 			}else{
 				UserModel::insert(['email'=>$email,'nickname'=>$nickname,'password'=>md5($password)]);
 				Session::forget($sessionMail);
-				return response()->view('mail.register-succ');
+				return response()->view('basic.register-succ');
 			}
 			
 		} else {
-			return response()->view('mail.register-fail', [
+			return response()->view('basic.register-fail', [
 					'msg' => '链接已失效'
 			]);
 		}
@@ -102,26 +102,9 @@ class BasicController extends Controller {
 	
 	
 	public function sendEmailSucc(){
-		return response()->view('mail.send-succ');
+		return response()->view('basic.send-succ');
 	}
 	
-	
-	public function registerSendEmail(Request $request)
-	{
-		$email = $request->input('email');
-		$key = 'hHzN2tbmu*R4o2sq3KWn';
-		$md5 = md5("{$key}");
-		Session::set('registerInfo', $md5.'|||'.$email);
-		$flag = Mail::send('mail.register', ['hash_string'=> $md5],function($message){
-			$to = '1096101803@qq.com';
-			$message ->to($to)->subject('账簿系统注册通知');
-		});
-			if($flag){
-				echo '发送邮件成功，请查收！';
-			}else{
-				echo '发送邮件失败，请重试！';
-			}
-	}
 	
 
 }
