@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Laravel</title>
+        <title>Login</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap-theme.min.css">
@@ -38,8 +38,8 @@
 	        	<div class="tab-pane fade" id="login-register">
 	    			<form role="form" action="login" method="POST">
 	                  <div class="form-group" >
-	                    <p>Username</p>
-	                    <input type="text" class="form-control" id="register-username" name="register-username">
+	                    <p>Email</p>
+	                    <input type="text" class="form-control" id="register-email" name="register-email">
 	                    <p>Nickname</p>
 	                    <input type="text" class="form-control" id="register-nickname" name="register-nickname">
 	                    <p>Password</p>

@@ -1,9 +1,6 @@
-$(function(){
-	layui.use(['layer']);
-});
 
 $('#registerButton').click(function(){
-	var username = $('#register-username').val();
+	var email = $('#register-email').val();
 	var nickname = $('#register-nickname').val();
 	var password = $('#register-password').val();
 	$.ajax({
@@ -11,16 +8,15 @@ $('#registerButton').click(function(){
 		  url: '/register',
 		  dataType: 'json',
 		  data: {
-			  'register-username' : username,
+			  'register-email' : email,
 			  'register-nickname' : nickname,
 			  'register-password' : password
 		  },
 		  success: function(result){
-			  if(result.code != 0){
-				  layer.msg(result.message);
+			  if(result.code == 0){
+				  location.href = "/sendEmailSucc";
 			  }else{
-				  layer.msg(result.message);
-				  location.href = '/';
+				  alert(result.message);
 			  }
 		  }
 		});

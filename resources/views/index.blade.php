@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>首页</title>
+        <title>Index</title>
         <!-- bootstrap jquery -->
         <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap-theme.min.css">
