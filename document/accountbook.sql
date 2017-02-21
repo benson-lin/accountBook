@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50717
+Source Server Version : 50612
 Source Host           : localhost:3306
-Source Database       : account_book
+Source Database       : accountbook
 
 Target Server Type    : MYSQL
-Target Server Version : 50717
+Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2017-01-31 10:29:50
+Date: 2017-02-21 13:16:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -50,18 +50,18 @@ CREATE TABLE `sessions` (
 DROP TABLE IF EXISTS `t101_user`;
 CREATE TABLE `t101_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(10) NOT NULL COMMENT '中文名',
+  `email` varchar(64) NOT NULL COMMENT '邮箱',
   `nickname` varchar(50) NOT NULL COMMENT '英文名，用于登录',
   `password` varchar(50) NOT NULL COMMENT '密码，MD5加密后的结果',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of t101_user
 -- ----------------------------
-INSERT INTO `t101_user` VALUES ('1', '林泽斌', 'bensonlin', '1', '2017-01-07 20:30:16', '2017-01-07 20:38:20');
+INSERT INTO `t101_user` VALUES ('25', '1096101803@qq.com', 'bensonlin', 'c4ca4238a0b923820dcc509a6f75849b', '2017-02-21 13:09:38', '2017-02-21 13:09:38');
 
 -- ----------------------------
 -- Table structure for `t102_admin`
@@ -149,16 +149,8 @@ CREATE TABLE `t301_income_expend_record` (
   `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=280 DEFAULT CHARSET=utf8 COMMENT='支出收入记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=utf8 COMMENT='支出收入记录表';
 
 -- ----------------------------
 -- Records of t301_income_expend_record
 -- ----------------------------
-INSERT INTO `t301_income_expend_record` VALUES ('272', '1', '10000', '1', '1', '1', '初始化金额', '2017-01-22 21:21:10', '2017-01-28 21:21:22', '2017-01-28 21:21:22');
-INSERT INTO `t301_income_expend_record` VALUES ('273', '1', '500', '2', '4', '1', '老大红包', '2017-01-22 21:21:34', '2017-01-28 21:21:56', '2017-01-28 21:21:56');
-INSERT INTO `t301_income_expend_record` VALUES ('274', '1', '30', '1', '19', '2', '吃饭', '2017-01-22 21:22:23', '2017-01-28 21:22:37', '2017-01-28 21:22:37');
-INSERT INTO `t301_income_expend_record` VALUES ('275', '1', '200', '1', '18', '2', '春节买衣服', '2017-01-23 21:22:52', '2017-01-28 21:23:34', '2017-01-28 21:23:34');
-INSERT INTO `t301_income_expend_record` VALUES ('276', '1', '200', '2', '21', '2', 'test', '2017-01-25 21:23:49', '2017-01-28 21:24:05', '2017-01-28 21:24:05');
-INSERT INTO `t301_income_expend_record` VALUES ('277', '1', '999', '4', '1', '1', '', '2017-01-26 22:18:33', '2017-01-28 22:18:51', '2017-01-28 22:18:51');
-INSERT INTO `t301_income_expend_record` VALUES ('278', '1', '50', '4', '18', '2', '', '2017-01-26 22:19:09', '2017-01-28 22:19:27', '2017-01-28 22:19:27');
-INSERT INTO `t301_income_expend_record` VALUES ('279', '1', '500', '3', '1', '1', '天降红包', '2017-01-27 22:37:22', '2017-01-28 22:37:49', '2017-01-28 22:37:49');
