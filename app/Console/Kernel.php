@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\Inspire::class,
+        \App\Console\Commands\Inspire::class,
+    	\App\Console\Commands\CleanUnverifyUser::class,
     ];
 
     /**
@@ -24,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-                 ->hourly();
+    	$suffix = date('Y-m-d');
+       	$schedule->command('acountbook:cleanunverifyuser')->cron('*/5 * * * * *')->appendOutputTo("logs/cleanunverifyuser-{$suffix}.log");
     }
 }

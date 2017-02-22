@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use App\Util\MVCUtil;
 use App\Models\UserModel;
 use Illuminate\Support\Facades\Mail;
+use App\Enum\MapEnum;
 
 class BasicController extends Controller {
 	
@@ -88,10 +89,9 @@ class BasicController extends Controller {
 		$emailMD5 = $result[1];
 		$time = $result[2];
 		
-		$expireTime = strtotime('+1 second',$time);
+		$expireTime = strtotime('+'.MapEnum::EXPIRE_MINUTES.' minute',$time);
 		$now = time();
 		if ($now > $expireTime) {//已过期
-			UserModel::where(['email' => $email])->delete();
 			return response()->view('basic.register-fail', [
 					'msg' => '链接已失效'
 			]);
