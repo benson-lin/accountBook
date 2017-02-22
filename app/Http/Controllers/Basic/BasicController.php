@@ -24,7 +24,7 @@ class BasicController extends Controller {
 	{
 		$nickname = $request->input('login-nickname');
 		$password = $request->input('login-password');
-		$user = UserModel::where('nickname', $nickname)->where('password', md5($password))
+		$user = UserModel::where('is_verify', 1)->where('nickname', $nickname)->where('password', md5($password))
 			->first();
 		if(!empty($user)){
 		    Session::set('user_id', $user['id']);
@@ -48,21 +48,28 @@ class BasicController extends Controller {
 		$email = $request->input('register-email');
 		$nickname = $request->input('register-nickname');
 		$password = $request->input('register-password');
+		if (empty($email) || empty($nickname) || empty($password)) {
+			return MVCUtil::getResponseContent(self::RET_FAIL, '存在空值');
+		}
+		
+		$user = UserModel::where('email', $email)->orWhere('nickname', $nickname)->get()->toArray();
+		if(!empty($user)){//用户已存在
+			return MVCUtil::getResponseContent(self::RET_FAIL, '邮箱或昵称已存在');
+		}
+		
 		
 		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
 		$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-		$text = $email;		
+		$text = $email.'&'.md5($email).'&'.time();		
 		
 		$cryptText = urlencode(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::KEY, $text, MCRYPT_MODE_ECB, $iv)));
-		Session::set($email.'-email', $email);
-		Session::set($email.'-nickname', $nickname);
-		Session::set($email.'-password', $password);
-		Session::save();
+		
 		$flag = Mail::send('basic.mail', ['text'=> $cryptText],function($message) use($email){
 			$to = $email;
 			$message ->to($to)->subject('账簿系统注册通知');
 		});
 		if($flag){
+			UserModel::insert(['email'=>$email,'nickname'=>$nickname,'password'=>md5($password),'is_verify'=>0]);
 			return MVCUtil::getResponseContent(self::RET_SUCC);
 		}else{
 			return MVCUtil::getResponseContent(self::RET_FAIL, '邮件发送失败，请重试');
@@ -74,25 +81,24 @@ class BasicController extends Controller {
 		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
 		$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
 		$crypttext = $request->input('data');
-		$email = mcrypt_decrypt(MCRYPT_RIJNDAEL_256,self::KEY,base64_decode($crypttext),MCRYPT_MODE_ECB,$iv);
-		$email = str_replace("\0", "", $email);
-		$sessionMail = $email.'-email';
-		if(Session::has($sessionMail) && Session::get($sessionMail) == $email) {
-			$nickname = Session::get($email.'-nickname');
-			$password = Session::get($email.'-password');
-			$user = UserModel::where('email', $email)->get()->toArray();
-			if(!empty($user)){//用户已存在
-				Session::forget($sessionMail);
-				return response()->view('basic.register-fail',[
-						'msg' => '邮箱已被注册'
-				]);
-
-			}else{
-				UserModel::insert(['email'=>$email,'nickname'=>$nickname,'password'=>md5($password)]);
-				Session::forget($sessionMail);
-				return response()->view('basic.register-succ');
-			}
-			
+		$data = mcrypt_decrypt(MCRYPT_RIJNDAEL_256,self::KEY,base64_decode($crypttext),MCRYPT_MODE_ECB,$iv);
+		$data = str_replace("\0", "", $data);
+		$result = explode('&',$data); 
+		$email = $result[0];
+		$emailMD5 = $result[1];
+		$time = $result[2];
+		
+		$expireTime = strtotime('+1 second',$time);
+		$now = time();
+		if ($now > $expireTime) {//已过期
+			UserModel::where(['email' => $email])->delete();
+			return response()->view('basic.register-fail', [
+					'msg' => '链接已失效'
+			]);
+		}
+		if (md5($email) == $emailMD5) {
+			UserModel::where('email', $email)->update(['is_verify' => 1]);
+			return response()->view('basic.register-succ');
 		} else {
 			return response()->view('basic.register-fail', [
 					'msg' => '链接已失效'
