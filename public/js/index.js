@@ -1,5 +1,5 @@
 $(function(){
-	layui.use(['layer']);
+	
 	initQueryMap();
 	initDateTimePicker();
 	getFormListData();

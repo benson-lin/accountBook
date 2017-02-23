@@ -8,7 +8,7 @@
         <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
         <script src="plugins/echarts/echarts.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/common.css">
-		<script src="/js/common.js"></script>
+		<script src="/js/user.js"></script>
     </head>
 <body>
     <div class="body">

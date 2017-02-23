@@ -26,12 +26,12 @@
 	        	<div class="tab-pane fade in active" id="login-form">
 	              	<form role="form" action="login" method="POST">
 	                  <div class="form-group" >
-	                  	<p>Nickname</p>
+	                  	<p>Nickname/Email</p>
 	                    <input type="text" class="form-control" id="login-nickname" name="login-nickname">
 	                    <p>Password</p>
 	                    <input type="password" class="form-control" id="login-password"  name="login-password">
 	                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-	                    <input type="submit" class="btn btn-default" value="Sign In" >
+	                    <input type="button" class="btn btn-default" value="Sign In" id="loginButton" >
 	                  </div>
 	                </form>
 	        	</div>
@@ -57,6 +57,7 @@
     	
     	
     </body>
+    <script type="text/javascript" src="js/common.js"></script>
     <link rel="stylesheet" href="css/login.css">
-    <script type="text/javascript" src="js/basic.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
 </html>

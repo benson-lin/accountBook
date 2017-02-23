@@ -27,8 +27,9 @@
 		<!-- my -->
    	    <link rel="stylesheet" type="text/css" href="css/index.css">
 		<link rel="stylesheet" type="text/css" href="css/common.css">
-		<script src="js/index.js"></script>	
 		<script src="js/common.js"></script>
+		<script src="js/user.js"></script>
+		<script src="js/index.js"></script>	
 
     </head>
     <body>

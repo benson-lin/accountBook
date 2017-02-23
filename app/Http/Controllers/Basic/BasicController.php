@@ -25,15 +25,17 @@ class BasicController extends Controller {
 	{
 		$nickname = $request->input('login-nickname');
 		$password = $request->input('login-password');
-		$user = UserModel::where('is_verify', 1)->where('nickname', $nickname)->where('password', md5($password))
-			->first();
+		$user = UserModel::where('is_verify', 1)->where('password', md5($password))
+				->where(function($query) use ($nickname){
+					$query->where('nickname', $nickname)->orWhere('email', $nickname);
+				})->first();
 		if(!empty($user)){
 		    Session::set('user_id', $user['id']);
-			Session::set('nickname', $nickname);
-			Cookie::queue('nickname', $nickname);
-			return redirect()->to('');
+			Session::set('nickname', $user['nickname']);
+			Cookie::queue('nickname', $user['nickname']);
+			return MVCUtil::getResponseContent(self::RET_SUCC);
 		}
-		return response()->view('login');
+		return MVCUtil::getResponseContent(self::RET_FAIL, '用户名或密码错误');
 	}
 	
 	
@@ -61,7 +63,9 @@ class BasicController extends Controller {
 		
 		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
 		$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-		$text = $email.'&'.md5($email).'&'.time();		
+		
+		$time = time();
+		$text = $email.'&'.md5($email).'&'.$time;		
 		
 		$cryptText = urlencode(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::KEY, $text, MCRYPT_MODE_ECB, $iv)));
 		
@@ -70,7 +74,8 @@ class BasicController extends Controller {
 			$message ->to($to)->subject('账簿系统注册通知');
 		});
 		if($flag){
-			UserModel::insert(['email'=>$email,'nickname'=>$nickname,'password'=>md5($password),'is_verify'=>0]);
+			UserModel::insert(['email'=>$email,'nickname'=>$nickname,'password'=>md5($password),'is_verify'=>0,
+					'create_time' => date('Y-m-d H:i:s', $time)]);
 			return MVCUtil::getResponseContent(self::RET_SUCC);
 		}else{
 			return MVCUtil::getResponseContent(self::RET_FAIL, '邮件发送失败，请重试');
