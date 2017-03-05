@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+.user-info {
+	width: 600px;
+	margin: 50px auto;
+	font-size: 20px;
+	
+}
+
+.user-info-nickname, .user-info-email {
+	padding-top: 10px;
+	padding-bottom: 40px;
+	background: url(/images/user-info-background.png) repeat-x;
+}

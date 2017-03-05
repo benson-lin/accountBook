@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>首页</title>
+        <title>个人信息</title>
         <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap-theme.min.css">
         <script type="text/javascript" src="plugins/jquery/jquery-3.1.1.min.js"></script>
         <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
         <script src="plugins/echarts/echarts.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/common.css">
+		<link rel="stylesheet" type="text/css" href="css/user.css">
 		<script src="/js/common.js"></script>
-		<script src="/js/user.js"></script>
+
 		
     </head>
 <body>
@@ -41,20 +42,21 @@
     	            </ul>
     			</div>
     		</div>    
-    	    <div class="main col-sm-10 ">
-    	    	<div class="col-sm-2" id="main-data">
-    	    		<span>余额：</span>
+    	    <div class="main col-sm-10">
+    	    	<div class="user-info">
+    	    		<div class="user-info-nickname">
+    	    		    <div class="col-sm-6">用户名</div>
+    	    			<div class="col-sm-6 nickname">　</div>
+    	    		</div>
+					<div class="user-info-email">
+	    	    		<div class="col-sm-6">邮箱</div>
+	    	    		<div class="col-sm-6 email">　</div>
+    	    		</div>
     	    	</div>
-				<div class="col-sm-10" id="main-chart">
-					<div class="col-sm-6" id="line-chart" style="width: 800px;height:400px;"></div>
-					<div class="col-sm-2" id="expend-bar-chart" style="width: 500px;height:400px;"></div>
-					<div class="col-sm-2" id="income-bar-chart" style="width: 500px;height:400px;"></div>
-				</div>    		    
     		</div>    
         
         </div>
     </div>
-    <script type="text/javascript" src="js/chart-statistics.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/chart-statistics.css">
+    <script src="/js/user.js"></script>
 </body>
 </html>

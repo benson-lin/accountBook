@@ -2,7 +2,8 @@
 
 $(function(){
 	user = getUserInfo();
-	$("#nickname").text(user.nickname);
+	$(".nickname").text(user.nickname);
+	$(".email").text(user.email);
 });
 
 

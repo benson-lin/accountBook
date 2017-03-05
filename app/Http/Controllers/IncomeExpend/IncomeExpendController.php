@@ -93,11 +93,14 @@ class IncomeExpendController extends Controller {
 	    if ($type == 2) {
 	    	$accountInfo = IncomeExpendRecordModel::where("account_category_id", $accountCategoryId)
 	    		->select('user_id', 'account_category_id', DB::raw('sum(case when type=1 then money else (-1)*money end) as money'))->get()->toArray();
-	    	
-	    	$restMoney = $accountInfo[0]['money'];
-	    	if ($restMoney < $money) {
+// 	    	echo $accountInfo;
+	    	$accountRestMoney = 0;
+	    	if (!empty($accountInfo[0]['money'])) {
+	    		$accountRestMoney = $accountInfo[0]['money'];
+	    	}
+	    	if ($accountRestMoney < $money) {
 	    		$account = AccountCategoryModel::getAccountById($accountCategoryId);
-	    		return MVCUtil::getResponseContent(self::RET_FAIL, '余额不足, 当前账户('.$account['name'].')下余额为：'.$restMoney);
+	    		return MVCUtil::getResponseContent(self::RET_FAIL, '余额不足, 当前账户('.$account['name'].')下余额为：'.$accountRestMoney);
 	    	}
 	    }
 

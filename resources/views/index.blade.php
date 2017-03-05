@@ -40,7 +40,7 @@
         	<div class="info">
         		<div class="dropdown">
                   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                    <span id="nickname"></span>
+                    <span class="nickname"></span>
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
@@ -56,7 +56,7 @@
     	            <ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="600">
     	                <li class="active"><a href="/main">收支汇总</a></li>
     	                <li><a href="/statistics">收支统计</a></li>
-    	                <li><a href="#section-3">个人信息</a></li>
+    	                <li><a href="/info">个人信息</a></li>
     	                <li><a href="#section-4">第四部分</a></li>
     	                <li><a href="#section-5">第五部分</a></li>
     	            </ul>

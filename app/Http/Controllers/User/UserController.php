@@ -12,6 +12,11 @@ use App\Models\UserModel;
 
 class UserController extends Controller {
 	
+	public function infoPage()
+	{
+		return response()->view('user/info');
+	}
+	
     public function getUserInfo()
     {
         $user = UserModel::where('nickname', $this->nickname)->first();

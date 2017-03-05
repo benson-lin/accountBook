@@ -19,6 +19,7 @@ Route::group(['namespace'=>'Basic'], function (){
 	
 });
 
+
 Route::group(['middleware'=>['check.login'], 'namespace'=>'Basic'], function (){
 	
 	Route::get('/', "BasicController@index");
@@ -44,6 +45,7 @@ Route::group(['middleware'=>['check.login'], 'namespace'=>'IncomeExpend'], funct
 Route::group(['middleware'=>['check.login'], 'namespace'=>'User'], function (){
 
     Route::get('/getUserInfo', 'UserController@getUserInfo');
+    Route::get('/info', 'UserController@infoPage');
 });
 
 
