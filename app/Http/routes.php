@@ -46,6 +46,7 @@ Route::group(['middleware'=>['check.login'], 'namespace'=>'User'], function (){
 
     Route::get('/getUserInfo', 'UserController@getUserInfo');
     Route::get('/info', 'UserController@infoPage');
+    Route::post('/modifyNickname', 'UserController@modifyNickname');
 });
 
 

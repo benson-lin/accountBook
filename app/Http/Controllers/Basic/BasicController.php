@@ -14,7 +14,7 @@ use App\Enum\MapEnum;
 
 class BasicController extends Controller {
 	
-	const KEY = '^$t^JwqDD1n7D^YL';
+
 	
     public function index()
     {
@@ -69,7 +69,7 @@ class BasicController extends Controller {
 		
 		$cryptText = urlencode(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::KEY, $text, MCRYPT_MODE_ECB, $iv)));
 		
-		$flag = Mail::send('basic.mail', ['text'=> $cryptText],function($message) use($email){
+		$flag = Mail::send('basic.mail', ['text'=> $cryptText, 'nickname'=>$nickname],function($message) use($email){
 			$to = $email;
 			$message ->to($to)->subject('账簿系统注册通知');
 		});

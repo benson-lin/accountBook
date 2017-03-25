@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Session;
 abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    
+ 
+    const KEY = '^$t^JwqDD1n7D^YL';
         /**
      * 成功返回码
      * @var int

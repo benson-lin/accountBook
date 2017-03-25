@@ -7,8 +7,8 @@
         	
         	.body {
         		width: 500px;
-        		border: 1px solid black;
-        		margin: 0 auto;
+        		border: 3px solid #aff;
+        		margin: 50px auto;        	
         	}
 
         	.body p {
@@ -24,7 +24,7 @@
     </head>
     <body>
     <div class="body">
-		<p>注册成功!!!</p>
+		<p>注册成功</p>
 		<p><a href="/">点击登陆</a></p>
     </div>
     </body>

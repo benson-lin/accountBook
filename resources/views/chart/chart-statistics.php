@@ -8,6 +8,7 @@
         <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
         <script src="plugins/echarts/echarts.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/common.css">
+		        <script src="plugins/layui/layui.js"></script>
 		<script src="/js/common.js"></script>
 		<script src="/js/user.js"></script>
 		
@@ -23,7 +24,7 @@
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">个人信息</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/info">个人信息</a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/logout">退出登录</a></li>
                   </ul>
                 </div>
