@@ -70,7 +70,7 @@ class ChartController extends Controller {
 	//近一个月收入支出比例
 	public function barChart() {
 		$incomeRecords = IncomeExpendRecordModel::select('income_expend_category_id', DB::RAW('sum(money) as money'))
-			->where('user_id', $this->userId)->where('type', 1)->whereBetween('add_time', [date("Y-m-d 00:00:00", strtotime("-30 day")), date("Y-m-d 00:00:00", strtotime("0 day"))])
+			->where('user_id', $this->userId)->where('type', 1)->whereBetween('add_time', [date("Y-m-d 00:00:00", strtotime("-30 day")), date("Y-m-d 00:00:00", strtotime("+1 day"))])
 			->with('incomeExpend')->groupBy('income_expend_category_id')->get()->toArray();
 		$incomeR = [];
 		$incomeAccountNames = [];
@@ -83,10 +83,8 @@ class ChartController extends Controller {
 			$oneR = ['name'=>$name, 'value'=>$value];
 			$incomeR[] = $oneR;
 		}
-		
-		
 		$expendRecords = IncomeExpendRecordModel::select('income_expend_category_id', DB::RAW('sum(money) as money'))
-			->where('user_id', $this->userId)->where('type', 2)->whereBetween('add_time', [date("Y-m-d 00:00:00", strtotime("-30 day")), date("Y-m-d 00:00:00", strtotime("0 day"))])
+			->where('user_id', $this->userId)->where('type', 2)->whereBetween('add_time', [date("Y-m-d 00:00:00", strtotime("-30 day")), date("Y-m-d 00:00:00", strtotime("+1 day"))])
 			->with('incomeExpend')->groupBy('income_expend_category_id')->get()->toArray();
 		$expendR = [];
 		$expendAccountNames = [];

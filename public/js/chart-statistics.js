@@ -24,79 +24,89 @@ function barChart(){//饼图
 			}
 		} 
 	});
-	var incomeBarChart = echarts.init(document.getElementById('income-bar-chart'));
-	var incomeOption = {
-		    title : {
-		        text: '近一个月收入比例',
-//		        subtext: '纯属虚构',
-		        x:'center'
-		    },
-		    tooltip : {
-		        trigger: 'item',
-		        formatter: "{a} <br/>{b} : {c} ({d}%)"
-		    },
-		    legend: {
-		        orient: 'vertical',
-		        left: 'left',
-		        data: incomeAccountNames
-		    },
-		    series : [
-		        {
-		            name: '账户',
-		            type: 'pie',
-		            radius : '45%',
-		            center: ['50%', '40%'],
-		            data: incomeRecords,
-		            itemStyle: {
-		                emphasis: {
-		                    shadowBlur: 10,
-		                    shadowOffsetX: 0,
-		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-		                }
-		            }
-		        }
-		    ]
-		};
+	if (expendRecords.length==0) {
+		$("#expend-bar-chart").hide();
+	} else {
+		var expendBarChart = echarts.init(document.getElementById('expend-bar-chart'));
+		var expendOption = {
+			    title : {
+			        text: '近一个月支出比例',
+//			        subtext: '纯属虚构',
+			        x:'center'
+			    },
+			    tooltip : {
+			        trigger: 'item',
+			        formatter: "{a} <br/>{b} : {c} ({d}%)"
+			    },
+			    legend: {
+			        orient: 'vertical',
+			        left: 'left',
+			        data: expendAccountNames
+			    },
+			    series : [
+			        {
+			            name: '账户',
+			            type: 'pie',
+			            radius : '45%',
+			            center: ['50%', '40%'],
+			            data: expendRecords,
+			            itemStyle: {
+			                emphasis: {
+			                    shadowBlur: 10,
+			                    shadowOffsetX: 0,
+			                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+			                }
+			            }
+			        }
+			    ]
+			};
 
-	incomeBarChart.setOption(incomeOption);
-	
-	
-	
-	var expendBarChart = echarts.init(document.getElementById('expend-bar-chart'));
-	var expendOption = {
-		    title : {
-		        text: '近一个月支出比例',
-//		        subtext: '纯属虚构',
-		        x:'center'
-		    },
-		    tooltip : {
-		        trigger: 'item',
-		        formatter: "{a} <br/>{b} : {c} ({d}%)"
-		    },
-		    legend: {
-		        orient: 'vertical',
-		        left: 'left',
-		        data: expendAccountNames
-		    },
-		    series : [
-		        {
-		            name: '账户',
-		            type: 'pie',
-		            radius : '45%',
-		            center: ['50%', '40%'],
-		            data: expendRecords,
-		            itemStyle: {
-		                emphasis: {
-		                    shadowBlur: 10,
-		                    shadowOffsetX: 0,
-		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-		                }
-		            }
-		        }
-		    ]
-		};
+		expendBarChart.setOption(expendOption);
+	}
+	if (incomeRecords.length==0) {
+		$("#income-bar-chart").hide();
+	} else{
+		var incomeBarChart = echarts.init(document.getElementById('income-bar-chart'));
+		var incomeOption = {
+			    title : {
+			        text: '近一个月收入比例',
+//			        subtext: '纯属虚构',
+			        x:'center'
+			    },
+			    tooltip : {
+			        trigger: 'item',
+			        formatter: "{a} <br/>{b} : {c} ({d}%)"
+			    },
+			    legend: {
+			        orient: 'vertical',
+			        left: 'left',
+			        data: incomeAccountNames
+			    },
+			    series : [
+			        {
+			            name: '账户',
+			            type: 'pie',
+			            radius : '45%',
+			            center: ['50%', '40%'],
+			            data: incomeRecords,
+			            itemStyle: {
+			                emphasis: {
+			                    shadowBlur: 10,
+			                    shadowOffsetX: 0,
+			                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+			                }
+			            }
+			        }
+			    ]
+			};
 
-	expendBarChart.setOption(expendOption);
+		incomeBarChart.setOption(incomeOption);
+	}
+	
+	
+	
+	
+	
 	
 }
 
