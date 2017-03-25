@@ -11,6 +11,7 @@ use App\Util\MVCUtil;
 use App\Models\UserModel;
 use Illuminate\Support\Facades\Mail;
 use App\Enum\MapEnum;
+use App\Util\ToolUtil;
 
 class BasicController extends Controller {
 	
@@ -60,14 +61,10 @@ class BasicController extends Controller {
 			return MVCUtil::getResponseContent(self::RET_FAIL, '邮箱或昵称已存在');
 		}
 		
-		
-		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
-		$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-		
 		$time = time();
 		$text = $email.'&'.md5($email).'&'.$time;		
 		
-		$cryptText = urlencode(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::KEY, $text, MCRYPT_MODE_ECB, $iv)));
+		$cryptText = ToolUtil::mcrypt($text);
 		
 		$flag = Mail::send('basic.mail', ['text'=> $cryptText, 'nickname'=>$nickname],function($message) use($email){
 			$to = $email;
@@ -84,11 +81,8 @@ class BasicController extends Controller {
 	
 	public function registerAccept(Request $request)
 	{
-		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
-		$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-		$crypttext = $request->input('data');
-		$data = mcrypt_decrypt(MCRYPT_RIJNDAEL_256,self::KEY,base64_decode($crypttext),MCRYPT_MODE_ECB,$iv);
-		$data = str_replace("\0", "", $data);
+		$cryptText = $request->input('data');
+		$data = ToolUtil::decrypt($cryptText);
 		$result = explode('&',$data); 
 		$email = $result[0];
 		$emailMD5 = $result[1];

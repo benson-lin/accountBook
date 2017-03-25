@@ -111,6 +111,7 @@ class IncomeExpendController extends Controller {
             'income_expend_category_id' => $incomeExpendCategoryId,
             'type' => $type,
             'add_time' => $addTime,
+        	'create_time' => ToolUtil::timetostr(time()),
             'remark' => $remark,
         ]);
 	    return MVCUtil::getResponseContent(self::RET_SUCC, '添加成功');
