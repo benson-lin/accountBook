@@ -64,12 +64,9 @@ class BasicController extends Controller {
 		$time = time();
 		$text = $email.'&'.md5($email).'&'.$time;		
 		
-		$cryptText = ToolUtil::mcrypt($text);
+		$cryptText = ToolUtil::mcrypt($text, self::KEY);
 		
-		$flag = Mail::send('basic.mail', ['text'=> $cryptText, 'nickname'=>$nickname],function($message) use($email){
-			$to = $email;
-			$message ->to($to)->subject('账簿系统注册通知');
-		});
+		$flag = ToolUtil::sendEmail($email, '账簿系统注册通知', 'basic.mail', ['text'=> $cryptText, 'nickname'=>$nickname]);
 		if($flag){
 			UserModel::insert(['email'=>$email,'nickname'=>$nickname,'password'=>md5($password),'is_verify'=>0,
 					'create_time' => date('Y-m-d H:i:s', $time)]);
@@ -82,11 +79,19 @@ class BasicController extends Controller {
 	public function registerAccept(Request $request)
 	{
 		$cryptText = $request->input('data');
-		$data = ToolUtil::decrypt($cryptText);
-		$result = explode('&',$data); 
-		$email = $result[0];
-		$emailMD5 = $result[1];
-		$time = $result[2];
+		$data = ToolUtil::decrypt($cryptText, self::KEY);
+		
+		try {
+			//如果解析失败说明链接有问题，直接提示失败
+			$result = explode('&',$data);
+			$email = $result[0];
+			$emailMD5 = $result[1];
+			$time = $result[2];
+		} catch (\Exception $e) {
+			return response()->view('basic.register-fail', [
+					'msg' => '链接已失效'
+			]);
+		}
 		
 		$expireTime = strtotime('+'.MapEnum::EXPIRE_MINUTES.' minute',$time);
 		$now = time();
@@ -106,10 +111,15 @@ class BasicController extends Controller {
 	}
 	
 	
-	public function sendEmailSucc(){
+	public function sendEmailSucc()
+	{
 		return response()->view('basic.send-succ');
 	}
 	
+	public function forgotPassword()
+	{
+		
+	}
 	
 
 }

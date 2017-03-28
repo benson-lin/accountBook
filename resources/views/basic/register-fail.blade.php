@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>注册成功</title>
+        <title>注册失败</title>
         <meta charset="utf-8">
         <style type="text/css">
         	

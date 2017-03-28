@@ -14,9 +14,8 @@ Route::group(['namespace'=>'Basic'], function (){
 	Route::get('registerSendEmail', 'BasicController@registerSendEmail');
 	Route::get('registerAccept', 'BasicController@registerAccept');
 	Route::get('sendEmailSucc', 'BasicController@sendEmailSucc');
-	
-	
-	
+	Route::get('forgotPassword', 'BasicController@forgotPassword');
+
 });
 
 

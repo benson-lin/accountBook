@@ -32,6 +32,7 @@
 	                    <input type="password" class="form-control" id="login-password"  name="login-password">
 	                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 	                    <input type="button" class="btn btn-default" value="Sign In" id="loginButton" >
+	                    <a href="/forgotPassword">忘记密码</a>
 	                  </div>
 	                </form>
 	        	</div>
@@ -46,6 +47,7 @@
 	                    <input type="password" class="form-control" id="register-password"  name="register-password">
 	                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 	                    <input type="button" class="btn btn-default" value="Sign Up"  id="registerButton">
+
 	                  </div>
 	                </form>
 	        	</div>
