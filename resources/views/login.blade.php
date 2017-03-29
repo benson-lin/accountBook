@@ -9,6 +9,8 @@
         <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
         <script src="plugins/layui/layui.js"></script>
         <script src="plugins/layui/css/layui.css"></script>	
+        <script src="plugins/bootstrap-dialog/bootstrap-dialog.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="plugins/bootstrap-dialog/bootstrap-dialog.min.css">
     </head>
     <body>
     <div class="body">
@@ -32,7 +34,7 @@
 	                    <input type="password" class="form-control" id="login-password"  name="login-password">
 	                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 	                    <input type="button" class="btn btn-default" value="Sign In" id="loginButton" >
-	                    <a href="/forgotPassword">忘记密码</a>
+	                    <a href="#" id="forgetPasswordButton">忘记密码</a>
 	                  </div>
 	                </form>
 	        	</div>

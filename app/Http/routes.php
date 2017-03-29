@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Session;
-use App\Util\ToolUtil;
 Route::get('/phpinfo', function(){
 	phpinfo();
 });
@@ -14,8 +12,10 @@ Route::group(['namespace'=>'Basic'], function (){
 	Route::get('registerSendEmail', 'BasicController@registerSendEmail');
 	Route::get('registerAccept', 'BasicController@registerAccept');
 	Route::get('sendEmailSucc', 'BasicController@sendEmailSucc');
-	Route::get('forgotPassword', 'BasicController@forgotPassword');
-
+	Route::post('forgetPassword', 'BasicController@forgetPassword');
+	Route::get('resetPassword', 'BasicController@resetPasswordPage');
+	Route::post('resetPassword', 'BasicController@resetPassword');
+	
 });
 
 

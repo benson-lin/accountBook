@@ -24,7 +24,7 @@
     </head>
     <body>
     <div class="body">
-		<p>注册失败</p>
+		<p>失败</p>
 		<p>原因：{{ $msg }}</p>
     </div>
     </body>

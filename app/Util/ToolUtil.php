@@ -4,7 +4,7 @@ namespace App\Util;
 use Illuminate\Support\Facades\Mail;
 class ToolUtil
 {
-	const KEY = '^$t^JwqDD1n7D^YL';
+	const REGIST_KEY = '^$t^JwqDD1n7D^YL';
 	/**
 	 * std对象转数组
 	 */

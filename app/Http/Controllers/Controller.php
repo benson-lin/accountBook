@@ -12,7 +12,9 @@ abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
  
-    const KEY = '^$t^JwqDD1n7D^YL';
+    const REGIST_KEY = '^$t^JwqDD1n7D^YL';
+    
+    const FORGET_KEY = '$^q^JwQdD1n3d^xL';
     
         /**
      * 成功返回码
