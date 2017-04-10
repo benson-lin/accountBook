@@ -38,25 +38,22 @@
     		<div class="col-sm-2">
     			<div class="menu">
     	            <ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="600">
-    	                <li class="active"><a href="/main">收支汇总</a></li>
+    	                <li><a href="/main">收支汇总</a></li>
     	                <li><a href="/statistics">收支统计</a></li>
-    	                <li><a href="/info">个人信息</a></li>
-    	                <li><a href="#section-4">第四部分</a></li>
-    	                <li><a href="#section-5">第五部分</a></li>
+    	                <li class="active"><a href="/info">个人信息</a></li>
     	            </ul>
     			</div>
     		</div>    
     	    <div class="main col-sm-10">
     	    	<div class="user-info">
     	    		<div class="user-info-nickname">
-    	    		    <div class="col-sm-4">用户名
-    	    		    </div>
-    	    			<div class="col-sm-6 nickname"></div>
-    	    			<div class="col-sm-2"><input type="button" data-toggle="modal"  id="modifyNicknameButton" value="修改" class="btn btn-default"></div>
+    	    		    <div class="col-sm-2">用户名</div>
+    	    			<div class="col-sm-3 nickname"></div>
+    	    			<div class="col-sm-3"><input type="button" data-toggle="modal"  id="modifyNicknameButton" value="修改" class="btn btn-default"></div>
     	    		</div>
 					<div class="user-info-email">
-	    	    		<div class="col-sm-4">邮箱</div>
-	    	    		<div class="col-sm-6 email">　</div>
+	    	    		<div class="col-sm-2">邮箱</div>
+	    	    		<div class="col-sm-3 email">　</div>
     	    		</div>
     	    	</div>
     		</div>    
@@ -75,9 +72,10 @@
           <h4 class="modal-title">修改昵称</h4>
         </div>
         <div class="modal-body">
-          	<div class="col-sm-2">新昵称：</div>
-          	<div class="col-sm-6"><input type="text" id="newNickname"></div>
-
+        	<div class="form-group" >
+	          	<div class="col-sm-2">新昵称：</div>
+	          	<div class="col-sm-6"><input type="text" id="newNickname" class="form-control"></div>
+			</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal" id="modifyNickname">确定</button>

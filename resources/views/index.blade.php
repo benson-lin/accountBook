@@ -3,19 +3,13 @@
     <head>
         <title>Index</title>
         <!-- bootstrap jquery -->
-        <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+      
         <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap-theme.min.css">
         <script type="text/javascript" src="plugins/jquery/jquery-3.1.1.min.js"></script>
         <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
         <script src="plugins/jquery-cookie/jquery.cookie.js"></script>
         <script src="plugins/jquery-fileDownload/jquery.fileDownload.js"></script>
         <script src="plugins/fileupload/fileupload.js"></script>
-        <!-- datatables -->
-		<script type="text/javascript" charset="utf8" src="plugins/datatables/jquery.dataTables.js"></script>    
-		<link rel="stylesheet" type="text/css" href="plugins/datatables/jquery.dataTables.css">
-		<script type="text/javascript" charset="utf8" src="plugins/datatables/datatables.js"></script>    
-		<script type="text/javascript" charset="utf8" src="plugins/datatables/dataTables.bootstrap.js"></script>    
-		<link rel="stylesheet" type="text/css" href="plugins/datatables/dataTables.bootstrap.css">
 		<!-- bootstrap-datetimepicker  -->
 		<link rel="stylesheet" href="plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
 		<script src="plugins/bootstrap-datetimepicker/moment.js"></script>
@@ -23,14 +17,22 @@
 		<script src="plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 		<!-- layer -->
         <script src="plugins/layui/layui.js"></script>
-		<link rel="stylesheet" href="plugins/layui/css/layui.css"  media="all">
+		<link rel="stylesheet" href="plugins/layui/css/layui.css">
+		
+		  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+		  <!-- datatables -->
+		<script type="text/javascript" charset="utf8" src="plugins/datatables/jquery.dataTables.js"></script>    
+		<link rel="stylesheet" type="text/css" href="plugins/datatables/jquery.dataTables.css">
+		<script type="text/javascript" charset="utf8" src="plugins/datatables/datatables.js"></script>    
+		<script type="text/javascript" charset="utf8" src="plugins/datatables/dataTables.bootstrap.js"></script>    
+		<link rel="stylesheet" type="text/css" href="plugins/datatables/dataTables.bootstrap.css">
 		<!-- my -->
    	    <link rel="stylesheet" type="text/css" href="css/index.css">
 		<link rel="stylesheet" type="text/css" href="css/common.css">
 		<script src="js/common.js"></script>
 		<script src="js/user.js"></script>
 		<script src="js/index.js"></script>	
-
+		
     </head>
     <body>
     
@@ -57,8 +59,6 @@
     	                <li class="active"><a href="/main">收支汇总</a></li>
     	                <li><a href="/statistics">收支统计</a></li>
     	                <li><a href="/info">个人信息</a></li>
-    	                <li><a href="#section-4">第四部分</a></li>
-    	                <li><a href="#section-5">第五部分</a></li>
     	            </ul>
     			</div>
     		</div>    

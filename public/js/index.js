@@ -4,6 +4,8 @@ $(function(){
 	initDateTimePicker();
 	getFormListData();
 	initEvent();
+	
+	
 });
 
 function initEvent(){

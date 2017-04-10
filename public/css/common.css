@@ -36,10 +36,10 @@ body{
 	margin-top:10px;
 }
 
-.bottom .menu {
+/* .bottom .menu {
 	background-color: #FFF;
 }
-
+ */
 .bottom .menu .nav-tabs>li.active>a {
 	border: none;
 }
