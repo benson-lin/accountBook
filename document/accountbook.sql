@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2017-02-21 13:16:57
+Date: 2017-04-19 22:50:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -53,32 +53,34 @@ CREATE TABLE `t101_user` (
   `email` varchar(64) NOT NULL COMMENT '邮箱',
   `nickname` varchar(50) NOT NULL COMMENT '英文名，用于登录',
   `password` varchar(50) NOT NULL COMMENT '密码，MD5加密后的结果',
+  `is_verify` tinyint(1) NOT NULL COMMENT '0：邮箱未验证，1：已验证，是合法用户',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of t101_user
 -- ----------------------------
-INSERT INTO `t101_user` VALUES ('25', '1096101803@qq.com', 'bensonlin', 'c4ca4238a0b923820dcc509a6f75849b', '2017-02-21 13:09:38', '2017-02-21 13:09:38');
+INSERT INTO `t101_user` VALUES ('34', '1096101803@qq.com', 'bensonlin', 'b0baee9d279d34fa1dfd71aadb908c3f', '1', '2017-03-05 11:32:38', '2017-03-29 17:57:37');
+INSERT INTO `t101_user` VALUES ('37', '2205763695@qq.com', 'test', '098f6bcd4621d373cade4e832627b4f6', '1', '2017-03-28 10:25:15', '2017-03-28 10:28:14');
 
 -- ----------------------------
--- Table structure for `t102_admin`
+-- Table structure for `t102_reset_password_expiration`
 -- ----------------------------
-DROP TABLE IF EXISTS `t102_admin`;
-CREATE TABLE `t102_admin` (
+DROP TABLE IF EXISTS `t102_reset_password_expiration`;
+CREATE TABLE `t102_reset_password_expiration` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nickname` varchar(50) NOT NULL COMMENT '英文名，用于登录',
-  `password` varchar(50) NOT NULL COMMENT '密码，MD5加密后的结果',
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `crypt_params` text,
+  `is_used` tinyint(4) DEFAULT NULL,
+  `create_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理员表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用来保存是否已重置密码';
 
 -- ----------------------------
--- Records of t102_admin
+-- Records of t102_reset_password_expiration
 -- ----------------------------
+INSERT INTO `t102_reset_password_expiration` VALUES ('7', '1096101803@qq.com&ab1c7fd04d0f75070488b64f9542e4e7&1490780541', '1', '2017-03-29 17:42:22');
 
 -- ----------------------------
 -- Table structure for `t201_account_category`
@@ -142,15 +144,17 @@ CREATE TABLE `t301_income_expend_record` (
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `money` float NOT NULL COMMENT '支出或收入金额',
   `account_category_id` int(11) NOT NULL COMMENT '所属账户',
-  `income_expend_category_id` varchar(100) NOT NULL COMMENT '用途',
+  `income_expend_category_id` int(11) NOT NULL COMMENT '用途',
   `type` tinyint(1) NOT NULL COMMENT '1收入，2支出',
   `remark` varchar(100) DEFAULT NULL COMMENT '备注',
   `add_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '记录时间',
-  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=utf8 COMMENT='支出收入记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='支出收入记录表';
 
 -- ----------------------------
 -- Records of t301_income_expend_record
 -- ----------------------------
+INSERT INTO `t301_income_expend_record` VALUES ('7', '34', '122', '1', '1', '1', '', '2017-04-10 21:05:22', '2017-04-10 21:05:31', '2017-04-10 21:05:31');
+INSERT INTO `t301_income_expend_record` VALUES ('8', '34', '121', '1', '18', '2', '', '2017-04-10 21:08:23', '2017-04-10 21:08:26', '2017-04-10 21:08:26');

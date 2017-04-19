@@ -9,7 +9,7 @@ class ResetPasswordExpiration extends Model
     protected $connection = 'account_book';
     public $timestamps = false;
     
-    const TABLE = 't103_reset_password_expiration';
+    const TABLE = 't102_reset_password_expiration';
     protected $table = self::TABLE;
     protected $primaryKey = 'id';
     
