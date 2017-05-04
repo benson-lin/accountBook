@@ -24,13 +24,21 @@ class UserController extends Controller {
     public function modifyNickname(Request $request)
     {
     	$newNickname = $request->input("newNickname");
-    	$user = UserModel::where('nickname', $newNickname)->first();
-    	if (!empty($user)) {
-    		return  MVCUtil::getResponseContent(self::RET_FAIL, '昵称已存在，请重新更改昵称');
+    	if (empty($newNickname)) {
+    		return  MVCUtil::getResponseContent(self::RET_FAIL, '昵称不能为空');
     	}
-    	UserModel::where('nickname', $this->nickname)->update(['nickname'=>$newNickname]);
-    	Session::forget('nickname');
-    	return  MVCUtil::getResponseContent(self::RET_SUCC);
+    	try{
+    		$user = UserModel::where('nickname', $newNickname)->first();
+    		if (!empty($user)) {
+    			return  MVCUtil::getResponseContent(self::RET_FAIL, '昵称已存在，请重新更改昵称');
+    		}
+    		UserModel::where('nickname', $this->nickname)->update(['nickname'=>$newNickname]);
+    		Session::forget('nickname');
+    		return  MVCUtil::getResponseContent(self::RET_SUCC);
+    	} catch (\Exception $e) {
+    		return  MVCUtil::getResponseContent(self::RET_FAIL, '系统错误');
+    	}
+
     	
     }
 }

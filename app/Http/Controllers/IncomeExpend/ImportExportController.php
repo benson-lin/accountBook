@@ -12,6 +12,7 @@ use Upload\File;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\IncomeExpendCategoryModel;
 use App\Models\AccountCategoryModel;
+use App\Util\ToolUtil;
 
 
 class ImportExportController extends Controller
@@ -150,7 +151,8 @@ class ImportExportController extends Controller
                         'type' => TypeEnum::getKey($type),
                         'account_category_id' => AccountCategoryModel::getIdByName($account),
                         'income_expend_category_id' => IncomeExpendCategoryModel::getIdByName($inEx),
-                        'remark' => $remark
+                        'remark' => $remark,
+                    	'create_time' => ToolUtil::timetostr(time())
                     ];
                }
                IncomeExpendRecordModel::insert($records);

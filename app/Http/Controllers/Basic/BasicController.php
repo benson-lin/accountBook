@@ -67,15 +67,20 @@ class BasicController extends Controller {
 		$text = $email.'&'.md5($email).'&'.$time;		
 		
 		$cryptText = ToolUtil::mcrypt($text, self::REGIST_KEY);
-		
-		$flag = ToolUtil::sendEmail($email, '账簿系统——注册', 'basic.mail', ['text'=> $cryptText, 'nickname'=>$nickname]);
-		if($flag){
-			UserModel::insert(['email'=>$email,'nickname'=>$nickname,'password'=>md5($password),'is_verify'=>0,
-					'create_time' => date('Y-m-d H:i:s', $time)]);
-			return MVCUtil::getResponseContent(self::RET_SUCC);
-		}else{
-			return MVCUtil::getResponseContent(self::RET_FAIL, '邮件发送失败，请重试');
+		try {
+			$flag = ToolUtil::sendEmail($email, '账簿系统——注册', 'basic.mail', ['text'=> $cryptText, 'nickname'=>$nickname]);
+			if($flag){
+				UserModel::insert(['email'=>$email,'nickname'=>$nickname,'password'=>md5($password),'is_verify'=>0,
+						'create_time' => date('Y-m-d H:i:s', $time)]);
+				return MVCUtil::getResponseContent(self::RET_SUCC);
+			}else{
+				return MVCUtil::getResponseContent(self::RET_FAIL, '邮件发送失败，请重试');
+			}
+		} catch (\Exception $e) {
+			return MVCUtil::getResponseContent(self::RET_FAIL, '邮件发送失败，请输入正确的邮件地址');
 		}
+		
+
 	}
 	
 	public function registerAccept(Request $request)
@@ -89,23 +94,22 @@ class BasicController extends Controller {
 			$email = $result[0];
 			$emailMD5 = $result[1];
 			$time = $result[2];
+			$expireTime = strtotime('+'.MapEnum::EXPIRE_MINUTES.' minute',$time);
+			$now = time();
+			if ($now > $expireTime) {//已过期
+				return response()->view('basic.fail', [
+						'msg' => '链接已失效'
+				]);
+			}
+			if (md5($email) == $emailMD5) {
+				UserModel::where('email', $email)->update(['is_verify' => 1]);
+				return response()->view('basic.register-succ');
+			} else {
+				return response()->view('basic.fail', [
+						'msg' => '链接已失效'
+				]);
+			}
 		} catch (\Exception $e) {
-			return response()->view('basic.fail', [
-					'msg' => '链接已失效'
-			]);
-		}
-		
-		$expireTime = strtotime('+'.MapEnum::EXPIRE_MINUTES.' minute',$time);
-		$now = time();
-		if ($now > $expireTime) {//已过期
-			return response()->view('basic.fail', [
-					'msg' => '链接已失效'
-			]);
-		}
-		if (md5($email) == $emailMD5) {
-			UserModel::where('email', $email)->update(['is_verify' => 1]);
-			return response()->view('basic.register-succ');
-		} else {
 			return response()->view('basic.fail', [
 					'msg' => '链接已失效'
 			]);
@@ -121,18 +125,27 @@ class BasicController extends Controller {
 	public function forgetPassword(Request $request)
 	{
 		$email = $request->input('forgetEmail');
-		$time = time();
-		$text = $email.'&'.md5($email).'&'.$time;
-		
-		$cryptText = ToolUtil::mcrypt($text, self::FORGET_KEY);
-		
-		$flag = ToolUtil::sendEmail($email, '账簿系统——忘记密码', 'basic.forget-password', ['text'=> $cryptText]);
-		if($flag) {
-			ResetPasswordExpiration::insert(['crypt_params'=>$text, 'is_used'=>0, 'create_time'=>ToolUtil::timetostr(time())]);
-			return MVCUtil::getResponseContent(self::RET_SUCC);
-		}else {
-			return MVCUtil::getResponseContent(self::RET_FAIL);
+		if (!empty($email)) {
+			return  MVCUtil::getResponseContent(self::RET_FAIL, '邮箱不能为空');
 		}
+		try {
+			$time = time();
+			$text = $email.'&'.md5($email).'&'.$time;
+			
+			$cryptText = ToolUtil::mcrypt($text, self::FORGET_KEY);
+			
+			$flag = ToolUtil::sendEmail($email, '账簿系统——忘记密码', 'basic.forget-password', ['text'=> $cryptText]);
+			if($flag) {
+				ResetPasswordExpiration::insert(['crypt_params'=>$text, 'is_used'=>0, 'create_time'=>ToolUtil::timetostr(time())]);
+				return MVCUtil::getResponseContent(self::RET_SUCC);
+			}else {
+				return MVCUtil::getResponseContent(self::RET_FAIL);
+			}
+		} catch (\Exception $e) {
+			return MVCUtil::getResponseContent(self::RET_FAIL, '邮件发送失败，请输入正确的邮件地址');
+		}
+		
+
 	}
 	public function resetPasswordPage(Request $request)
 	{

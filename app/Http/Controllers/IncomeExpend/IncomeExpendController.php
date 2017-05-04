@@ -91,7 +91,7 @@ class IncomeExpendController extends Controller {
 	    
 	    //获取某个列表下的剩余金额，如果是支出，不允许超过这个金额
 	    if ($type == 2) {
-	    	$accountInfo = IncomeExpendRecordModel::where("account_category_id", $accountCategoryId)
+	    	$accountInfo = IncomeExpendRecordModel::where("account_category_id", $accountCategoryId)->where("user_id", $this->userId)
 	    		->select('user_id', 'account_category_id', DB::raw('sum(case when type=1 then money else (-1)*money end) as money'))->get()->toArray();
 // 	    	echo $accountInfo;
 	    	$accountRestMoney = 0;
