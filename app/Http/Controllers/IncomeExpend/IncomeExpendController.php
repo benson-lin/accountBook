@@ -88,7 +88,9 @@ class IncomeExpendController extends Controller {
 	    $accountCategoryId = $request->input("accountCategoryId");
 	    $incomeExpendCategoryId = $request->input("incomeExpendCategoryId");
 	    $remark = $request->input("remark");
-	    
+	    if($money < 0) {
+	    	return MVCUtil::getResponseContent(self::RET_FAIL, '金额不能小于0');
+	    }
 	    //获取某个列表下的剩余金额，如果是支出，不允许超过这个金额
 	    if ($type == 2) {
 	    	$accountInfo = IncomeExpendRecordModel::where("account_category_id", $accountCategoryId)->where("user_id", $this->userId)
